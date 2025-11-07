@@ -55,4 +55,49 @@ document.addEventListener('DOMContentLoaded', () => {
             hero.style.animation = 'gentlePulse 2s ease-in-out';
         }, 300);
     }
+
+    // Doorway toggle functionality
+    const doorwayToggles = document.querySelectorAll('.doorway-toggle');
+
+    doorwayToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const targetId = toggle.getAttribute('data-target');
+            const targetColumn = document.getElementById(targetId);
+
+            if (!targetColumn) return;
+
+            // Toggle active state
+            const isActive = toggle.classList.contains('active');
+
+            if (isActive) {
+                // Hide column
+                toggle.classList.remove('active');
+                targetColumn.classList.add('hidden');
+
+                // Change indicator to +
+                const indicator = toggle.querySelector('.doorway-indicator');
+                if (indicator) indicator.textContent = '+';
+            } else {
+                // Show column
+                toggle.classList.add('active');
+                targetColumn.classList.remove('hidden');
+
+                // Change indicator to −
+                const indicator = toggle.querySelector('.doorway-indicator');
+                if (indicator) indicator.textContent = '−';
+            }
+
+            // Smooth scroll to content section if revealing
+            if (!isActive) {
+                setTimeout(() => {
+                    targetColumn.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }, 300);
+            }
+        });
+    });
 });

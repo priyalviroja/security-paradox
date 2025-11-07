@@ -181,32 +181,35 @@ index_html = """<!DOCTYPE html>
             <h2 class="section-title">Three Doorways</h2>
             <div class="doorways-grid">
 
-                <a href="#epiphanies" class="doorway" id="epiphanies">
+                <button class="doorway doorway-toggle active" data-target="epiphanies-column">
                     <div class="doorway-icon">💡</div>
                     <h3 class="doorway-title">Epiphanies</h3>
                     <p class="doorway-description">
                         Short, 3-minute ideas that challenge assumptions about security, control, and leadership.
                     </p>
                     <span class="doorway-count">11 insights</span>
-                </a>
+                    <span class="doorway-indicator">−</span>
+                </button>
 
-                <a href="#reflections" class="doorway" id="reflections">
+                <button class="doorway doorway-toggle active" data-target="reflections-column">
                     <div class="doorway-icon">📖</div>
                     <h3 class="doorway-title">Reflections</h3>
                     <p class="doorway-description">
                         Longer essays exploring the paradoxes of security leadership and organizational resilience.
                     </p>
                     <span class="doorway-count">3 essays</span>
-                </a>
+                    <span class="doorway-indicator">−</span>
+                </button>
 
-                <a href="#mental-models" class="doorway" id="mental-models">
+                <button class="doorway doorway-toggle active" data-target="models-column">
                     <div class="doorway-icon">🧠</div>
                     <h3 class="doorway-title">Mental Models</h3>
                     <p class="doorway-description">
                         Interactive visualizations of abstract security truths—complexity, defense, and trust.
                     </p>
                     <span class="doorway-count">Explore</span>
-                </a>
+                    <span class="doorway-indicator">−</span>
+                </button>
 
             </div>
         </div>
@@ -217,7 +220,7 @@ index_html = """<!DOCTYPE html>
             <div class="content-grid">
 
                 <!-- Column 1: The Journey of Epiphanies -->
-                <div class="content-column">
+                <div class="content-column" id="epiphanies-column">
                     <h3 class="content-heading">The Journey of Epiphanies</h3>
                     <p class="journey-intro">11 insights that build upon each other, taking you from awakening to integration.</p>
 
@@ -256,7 +259,7 @@ index_html += """                    </div>
                 </div>
 
                 <!-- Column 2: Recent Reflections -->
-                <div class="content-column">
+                <div class="content-column" id="reflections-column">
                     <h3 class="content-heading">Recent Reflections</h3>
                     <p class="column-intro">Longer essays exploring security leadership, culture, and transformation.</p>
                     <div class="content-list">
@@ -274,7 +277,7 @@ index_html += """                    </div>
                 </div>
 
                 <!-- Column 3: Mental Models -->
-                <div class="content-column">
+                <div class="content-column" id="models-column">
                     <h3 class="content-heading">Mental Models</h3>
                     <p class="column-intro">Interactive visualizations of abstract security truths.</p>
                     <div class="content-list">

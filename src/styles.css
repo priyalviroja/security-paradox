@@ -326,6 +326,15 @@ a:hover {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  font-family: inherit;
+  color: inherit;
+}
+
+.doorway-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .doorway::before {
@@ -407,6 +416,74 @@ a:hover {
   font-family: var(--font-sans);
   position: relative;
   z-index: 1;
+}
+
+.doorway-indicator {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-primary);
+  color: var(--bg-deep);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: var(--transition-smooth);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.doorway-toggle:not(.active) {
+  opacity: 0.6;
+  border-color: var(--border-subtle);
+}
+
+.doorway-toggle:not(.active) .doorway-indicator {
+  background: var(--text-muted);
+  transform: rotate(0deg);
+}
+
+.doorway-toggle.active .doorway-indicator {
+  background: var(--accent-primary);
+  transform: rotate(0deg);
+}
+
+.doorway-toggle:hover .doorway-indicator {
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 16px rgba(124, 156, 191, 0.5);
+}
+
+/* Doorway-specific colors */
+.doorway-toggle[data-target="epiphanies-column"] .doorway-indicator {
+  background: var(--act-awakening);
+}
+
+.doorway-toggle[data-target="epiphanies-column"]:hover {
+  border-color: var(--act-awakening);
+  box-shadow: 0 12px 40px var(--act-awakening-glow);
+}
+
+.doorway-toggle[data-target="reflections-column"] .doorway-indicator {
+  background: var(--act-reframing);
+}
+
+.doorway-toggle[data-target="reflections-column"]:hover {
+  border-color: var(--act-reframing);
+  box-shadow: 0 12px 40px var(--act-reframing-glow);
+}
+
+.doorway-toggle[data-target="models-column"] .doorway-indicator {
+  background: var(--act-integration);
+}
+
+.doorway-toggle[data-target="models-column"]:hover {
+  border-color: var(--act-integration);
+  box-shadow: 0 12px 40px var(--act-integration-glow);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1068,6 +1145,50 @@ nav.hidden {
 
 .mt-xl {
   margin-top: var(--space-xl);
+}
+
+/* Column Toggle Animation */
+.content-column {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+  opacity: 1;
+  max-height: 5000px;
+  overflow: hidden;
+}
+
+.content-column.hidden {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transform: scaleY(0);
+  pointer-events: none;
+}
+
+/* Adjust grid when columns are hidden */
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(2)) {
+  grid-template-columns: 1fr;
+}
+
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(3)) {
+  grid-template-columns: 1fr;
+}
+
+.content-grid:has(.content-column.hidden:nth-child(2)):has(.content-column.hidden:nth-child(3)) {
+  grid-template-columns: 1fr;
+}
+
+.content-grid:has(.content-column.hidden:nth-child(1)):not(:has(.content-column.hidden:nth-child(2))):not(:has(.content-column.hidden:nth-child(3))) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-grid:has(.content-column.hidden:nth-child(2)):not(:has(.content-column.hidden:nth-child(1))):not(:has(.content-column.hidden:nth-child(3))) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-grid:has(.content-column.hidden:nth-child(3)):not(:has(.content-column.hidden:nth-child(1))):not(:has(.content-column.hidden:nth-child(2))) {
+  grid-template-columns: 1fr 1fr;
 }
 
 .mb-xl {
