@@ -97,6 +97,21 @@ h3 {
 p {
   margin-bottom: var(--space-sm);
   color: var(--text-secondary);
+  max-width: 75ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Article body paragraphs - more contemplative spacing */
+.article-wrap p {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.article-wrap p + p {
+  margin-top: 1.5rem;
 }
 
 a {
@@ -152,6 +167,37 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════
    Doorways (Interactive Navigation)
    ═══════════════════════════════════════════════════════════ */
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-primary);
+  margin: var(--space-md) auto 0;
+  opacity: 0.6;
+}
+
+.doorways-section {
+  padding: var(--space-xl) 0;
+  background: var(--bg-elevated);
+}
+
+.doorways-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
 
 .doorways {
   display: grid;
@@ -262,8 +308,15 @@ a:hover {
 
 /* Epiphany-specific styles */
 .epiphany-section {
-  margin: var(--space-lg) 0;
+  margin: var(--space-xl) 0;
   padding: var(--space-md) 0;
+}
+
+.epiphany-section p {
+  font-size: 1.125rem;
+  line-height: 2;
+  margin-bottom: 1.75rem;
+  color: var(--text-primary);
 }
 
 .epiphany-label {
@@ -272,17 +325,21 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--accent-primary);
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
+  display: block;
 }
 
 .principle-takeaway {
   background: var(--bg-card);
   border-left: 3px solid var(--accent-primary);
-  padding: var(--space-md);
-  margin: var(--space-md) 0;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
   font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.8;
   opacity: 0;
   animation: fadeIn 1s ease-out 2s forwards;
+  color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════
