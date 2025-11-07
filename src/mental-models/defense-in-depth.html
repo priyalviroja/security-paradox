@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defense in Depth - Mental Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .model-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        .layers-container {
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            position: relative;
+            margin: var(--space-lg) 0;
+        }
+        
+        .defense-layer {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid var(--accent-primary);
+            background: radial-gradient(circle at center, transparent 60%, var(--accent-glow) 100%);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0.7;
+        }
+        
+        .defense-layer:hover {
+            opacity: 1;
+            border-width: 4px;
+            background: radial-gradient(circle at center, transparent 50%, var(--accent-glow) 100%);
+            z-index: 10;
+        }
+        
+        .defense-layer.breached {
+            border-color: #ff6b6b;
+            background: radial-gradient(circle at center, transparent 60%, rgba(255, 107, 107, 0.15) 100%);
+            opacity: 0.3;
+        }
+        
+        .layer-label {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--bg-deep);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .attacker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            transition: all 1s ease;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+        
+        .attacker.moving {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .controls {
+            margin: var(--space-md) 0;
+        }
+        
+        .control-btn {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin: var(--space-xs);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+        }
+        
+        .model-insight {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+            max-width: 700px;
+        }
+        
+        .status {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: var(--space-sm) 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="model-container">
+        <h1>Defense in Depth</h1>
+        <p class="model-description">
+            Multiple overlapping layers of security. When one fails, others remain. 
+            Click "Simulate Attack" to see how layers protect—or fail.
+        </p>
+        
+        <div class="layers-container" id="layers">
+            <div class="defense-layer" style="width: 500px; height: 500px; top: 50px; left: 50px;" data-layer="0">
+                <span class="layer-label">Network Firewall</span>
+            </div>
+            <div class="defense-layer" style="width: 400px; height: 400px; top: 100px; left: 100px;" data-layer="1">
+                <span class="layer-label">WAF</span>
+            </div>
+            <div class="defense-layer" style="width: 300px; height: 300px; top: 150px; left: 150px;" data-layer="2">
+                <span class="layer-label">Authentication</span>
+            </div>
+            <div class="defense-layer" style="width: 200px; height: 200px; top: 200px; left: 200px;" data-layer="3">
+                <span class="layer-label">Authorization</span>
+            </div>
+            <div class="defense-layer" style="width: 100px; height: 100px; top: 250px; left: 250px;" data-layer="4">
+                <span class="layer-label">Data Encryption</span>
+            </div>
+            <div class="attacker" id="attacker"></div>
+        </div>
+        
+        <div class="status" id="status">All layers intact</div>
+        
+        <div class="controls">
+            <button class="control-btn" onclick="simulateAttack()">Simulate Attack</button>
+            <button class="control-btn" onclick="reset()">Reset</button>
+        </div>
+        
+        <div class="model-insight">
+            "Defense in depth is not about making each layer perfect—it's about ensuring that when one layer fails, the breach is contained. Redundancy is not waste; it's wisdom."
+        </div>
+    </div>
+    
+    <script>
+        let currentLayer = 0;
+        const totalLayers = 5;
+        
+        function simulateAttack() {
+            const attacker = document.getElementById('attacker');
+            const status = document.getElementById('status');
+            
+            attacker.classList.add('moving');
+            status.textContent = 'Attack in progress...';
+            
+            let breached = 0;
+            const interval = setInterval(() => {
+                if (currentLayer >= totalLayers) {
+                    clearInterval(interval);
+                    status.textContent = 'All layers breached! Data compromised.';
+                    status.style.color = '#ff6b6b';
+                    return;
+                }
+                
+                // Random chance of layer holding
+                const holds = Math.random() > 0.4;
+                const layer = document.querySelector(`[data-layer="${currentLayer}"]`);
+                
+                if (!holds) {
+                    layer.classList.add('breached');
+                    breached++;
+                    currentLayer++;
+                    status.textContent = `Layer ${breached} breached. ${totalLayers - breached} layers remaining.`;
+                } else {
+                    clearInterval(interval);
+                    status.textContent = `Attack stopped at layer ${breached + 1}. Defense held!`;
+                    status.style.color = var(--accent-primary);
+                }
+            }, 1000);
+        }
+        
+        function reset() {
+            const attacker = document.getElementById('attacker');
+            const status = document.getElementById('status');
+            const layers = document.querySelectorAll('.defense-layer');
+            
+            attacker.classList.remove('moving');
+            layers.forEach(layer => layer.classList.remove('breached'));
+            currentLayer = 0;
+            status.textContent = 'All layers intact';
+            status.style.color = 'var(--text-secondary)';
+        }
+    </script>
+</body>
+</html>
+

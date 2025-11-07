@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Surface - Mental Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .model-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        .model-canvas {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            margin: var(--space-lg) 0;
+        }
+        
+        .complexity-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(124, 156, 191, 0.3), rgba(124, 156, 191, 0.1));
+            border: 2px solid var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .complexity-bubble:hover {
+            transform: scale(1.1);
+            background: radial-gradient(circle at 30% 30%, rgba(124, 156, 191, 0.5), rgba(124, 156, 191, 0.2));
+            border-color: var(--text-primary);
+            z-index: 10;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .model-description {
+            max-width: 700px;
+            text-align: center;
+            margin-top: var(--space-md);
+        }
+        
+        .model-insight {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+            max-width: 700px;
+        }
+        
+        .add-complexity-btn {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin: var(--space-sm);
+        }
+        
+        .add-complexity-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="model-container">
+        <h1>Attack Surface</h1>
+        <p class="model-description">
+            Your attack surface grows with every feature, integration, and dependency. 
+            Hover over each bubble to see how complexity compounds.
+        </p>
+        
+        <div class="model-canvas" id="canvas"></div>
+        
+        <div>
+            <button class="add-complexity-btn" onclick="addFeature()">Add Feature</button>
+            <button class="add-complexity-btn" onclick="addIntegration()">Add Integration</button>
+            <button class="add-complexity-btn" onclick="reset()">Reset</button>
+        </div>
+        
+        <div class="model-insight">
+            "Every line of code, every API endpoint, every third-party integration is a potential entry point. 
+            The attack surface is not what you build—it's what you expose."
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const elements = [
+            { name: 'Core App', size: 80 },
+            { name: 'API', size: 60 },
+            { name: 'Database', size: 70 },
+            { name: 'Auth', size: 50 }
+        ];
+        
+        const features = ['Analytics', 'Chat', 'Payments', 'Search', 'Notifications', 'Reports'];
+        const integrations = ['AWS', 'Stripe', 'SendGrid', 'Slack', 'Google', 'Salesforce'];
+        
+        function render() {
+            canvas.innerHTML = '';
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            elements.forEach((el, i) => {
+                const bubble = document.createElement('div');
+                bubble.className = 'complexity-bubble';
+                bubble.textContent = el.name;
+                bubble.style.width = el.size + 'px';
+                bubble.style.height = el.size + 'px';
+                
+                // Position bubbles
+                const angle = (i / elements.length) * 2 * Math.PI;
+                const radius = Math.min(canvasRect.width, canvasRect.height) * 0.3;
+                const x = canvasRect.width / 2 + radius * Math.cos(angle) - el.size / 2;
+                const y = canvasRect.height / 2 + radius * Math.sin(angle) - el.size / 2;
+                
+                bubble.style.left = x + 'px';
+                bubble.style.top = y + 'px';
+                bubble.style.animationDelay = (i * 0.2) + 's';
+                
+                canvas.appendChild(bubble);
+            });
+        }
+        
+        function addFeature() {
+            if (features.length === 0) return;
+            const feature = features.shift();
+            elements.push({ name: feature, size: 40 + Math.random() * 30 });
+            render();
+        }
+        
+        function addIntegration() {
+            if (integrations.length === 0) return;
+            const integration = integrations.shift();
+            elements.push({ name: integration, size: 45 + Math.random() * 25 });
+            render();
+        }
+        
+        function reset() {
+            elements.length = 0;
+            elements.push(
+                { name: 'Core App', size: 80 },
+                { name: 'API', size: 60 },
+                { name: 'Database', size: 70 },
+                { name: 'Auth', size: 50 }
+            );
+            features.length = 0;
+            features.push('Analytics', 'Chat', 'Payments', 'Search', 'Notifications', 'Reports');
+            integrations.length = 0;
+            integrations.push('AWS', 'Stripe', 'SendGrid', 'Slack', 'Google', 'Salesforce');
+            render();
+        }
+        
+        // Initial render
+        render();
+        
+        // Re-render on resize
+        window.addEventListener('resize', render);
+    </script>
+</body>
+</html>
+

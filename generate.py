@@ -15,25 +15,280 @@ for fn in ["styles.css", "script.js"]:
     if os.path.exists(src):
         shutil.copy(src, DIST)
 
-# Render epiphanies
-epip_dir = os.path.join(SRC, "epiphanies")
-os.makedirs(os.path.join(DIST, "epiphanies"), exist_ok=True)
-for mdfile in os.listdir(epip_dir):
-    if not mdfile.endswith(".md"): continue
-    text = open(os.path.join(epip_dir, mdfile)).read()
-    title = re.search(r'^title:\s*"(.*?)"', text, re.M).group(1)
-    body_md = re.sub(r'^---[\s\S]+?---', '', text)
+# Copy mental models (HTML files)
+mental_models_src = os.path.join(SRC, "mental-models")
+mental_models_dist = os.path.join(DIST, "mental-models")
+if os.path.exists(mental_models_src):
+    shutil.copytree(mental_models_src, mental_models_dist)
+
+def render_markdown_section(section_name, output_dir):
+    """Render markdown files from a section directory"""
+    section_dir = os.path.join(SRC, section_name)
+    if not os.path.exists(section_dir):
+        return []
+
+    os.makedirs(output_dir, exist_ok=True)
+    items = []
+
+    for mdfile in os.listdir(section_dir):
+        if not mdfile.endswith(".md"):
+            continue
+
+        text = open(os.path.join(section_dir, mdfile), encoding='utf-8').read()
+        title_match = re.search(r'^title:\s*"(.*?)"', text, re.M)
+        if not title_match:
+            continue
+
+        title = title_match.group(1)
+        read_time_match = re.search(r'^readTime:\s*"(.*?)"', text, re.M)
+        read_time = read_time_match.group(1) if read_time_match else ""
+
+        body_md = re.sub(r'^---[\s\S]+?---\n*', '', text)
+        html = markdown.markdown(body_md)
+
+        # Enhanced page template with navigation
+        page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - The Security Paradox</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <article class="article-wrap">
+            <div class="article-header">
+                <div class="article-meta">{section_name.upper()}{' • ' + read_time if read_time else ''}</div>
+                <h1>{title}</h1>
+            </div>
+            {html}
+        </article>
+    </main>
+    <script src="../script.js"></script>
+</body>
+</html>"""
+
+        output_file = os.path.join(output_dir, mdfile.replace('.md', '.html'))
+        open(output_file, "w", encoding='utf-8').write(page)
+        items.append({'title': title, 'file': mdfile.replace('.md', '.html'), 'readTime': read_time})
+
+    return items
+
+# Render all sections
+epiphanies = render_markdown_section("epiphanies", os.path.join(DIST, "epiphanies"))
+reflections = render_markdown_section("reflections", os.path.join(DIST, "reflections"))
+audio = render_markdown_section("audio", os.path.join(DIST, "audio"))
+
+# Render about page
+about_src = os.path.join(SRC, "about.md")
+if os.path.exists(about_src):
+    text = open(about_src, encoding='utf-8').read()
+    title_match = re.search(r'^title:\s*"(.*?)"', text, re.M)
+    title = title_match.group(1) if title_match else "About"
+    body_md = re.sub(r'^---[\s\S]+?---\n*', '', text)
     html = markdown.markdown(body_md)
-    page = f"<html><head><title>{title}</title><link rel='stylesheet' href='../styles.css'></head><body><main class='container'><article class='article-wrap'><h1>{title}</h1>{html}</article></main></body></html>"
-    open(os.path.join(DIST, "epiphanies", mdfile.replace('.md', '.html')), "w").write(page)
 
-# Create simple index
-index_html = "<html><head><title>The Security Paradox</title><link rel='stylesheet' href='styles.css'></head><body><main class='container'><h1>The Security Paradox</h1><p>Security leadership is not the science of control — it's the art of understanding chaos.</p><ul>"
-for mdfile in os.listdir(epip_dir):
-    if mdfile.endswith('.md'):
-        title = re.search(r'^title:\s*"(.*?)"', open(os.path.join(epip_dir, mdfile)).read(), re.M).group(1)
-        index_html += f"<li><a href='epiphanies/{mdfile.replace('.md','.html')}'>{title}</a></li>"
-index_html += "</ul></main></body></html>"
-open(os.path.join(DIST, "index.html"), "w").write(index_html)
+    page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - The Security Paradox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="index.html#reflections">Reflections</a></li>
+                <li><a href="index.html#mental-models">Mental Models</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        {html}
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>"""
 
-print("Generated site in dist/")
+    open(os.path.join(DIST, "about.html"), "w", encoding='utf-8').write(page)
+
+# Create enhanced home page with doorways
+index_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Security Paradox</title>
+    <meta name="description" content="Security leadership is not the science of control — it's the art of understanding chaos.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="#epiphanies">Epiphanies</a></li>
+                <li><a href="#reflections">Reflections</a></li>
+                <li><a href="#mental-models">Mental Models</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">The Security Paradox</h1>
+            <p class="hero-subtitle">Security leadership is not the science of control — it's the art of understanding chaos.</p>
+            <p class="hero-description">
+                For CISOs and security leaders who know that the hardest problems aren't technical—they're human, organizational, cultural.
+            </p>
+        </div>
+    </section>
+
+    <section class="doorways-section">
+        <div class="container">
+            <h2 class="section-title">Three Doorways</h2>
+            <div class="doorways-grid">
+
+                <a href="#epiphanies" class="doorway" id="epiphanies">
+                    <div class="doorway-icon">💡</div>
+                    <h3 class="doorway-title">Epiphanies</h3>
+                    <p class="doorway-description">
+                        Short, 3-minute ideas that challenge assumptions about security, control, and leadership.
+                    </p>
+                    <span class="doorway-count">{} insights</span>
+                </a>
+
+                <a href="#reflections" class="doorway" id="reflections">
+                    <div class="doorway-icon">📖</div>
+                    <h3 class="doorway-title">Reflections</h3>
+                    <p class="doorway-description">
+                        Longer essays exploring the paradoxes of security leadership and organizational resilience.
+                    </p>
+                    <span class="doorway-count">{} essays</span>
+                </a>
+
+                <a href="#mental-models" class="doorway" id="mental-models">
+                    <div class="doorway-icon">🧠</div>
+                    <h3 class="doorway-title">Mental Models</h3>
+                    <p class="doorway-description">
+                        Interactive visualizations of abstract security truths—complexity, defense, and trust.
+                    </p>
+                    <span class="doorway-count">Explore</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+
+                <div class="content-column">
+                    <h3 class="content-heading">Recent Epiphanies</h3>
+                    <div class="content-list">
+""".format(len(epiphanies), len(reflections))
+
+# Add epiphanies
+for item in epiphanies[:5]:
+    index_html += f"""                        <a href="epiphanies/{item['file']}" class="content-item">
+                            <h4>{item['title']}</h4>
+                            <span class="read-time">{item['readTime']}</span>
+                        </a>
+"""
+
+index_html += """                    </div>
+                </div>
+
+                <div class="content-column">
+                    <h3 class="content-heading">Recent Reflections</h3>
+                    <div class="content-list">
+"""
+
+# Add reflections
+for item in reflections[:3]:
+    index_html += f"""                        <a href="reflections/{item['file']}" class="content-item">
+                            <h4>{item['title']}</h4>
+                            <span class="read-time">{item['readTime']}</span>
+                        </a>
+"""
+
+index_html += """                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="mental-models-section">
+        <div class="container">
+            <h3 class="content-heading">Mental Models</h3>
+            <div class="models-grid">
+                <a href="mental-models/attack-surface.html" class="model-card">
+                    <div class="model-icon">🎯</div>
+                    <h4>Attack Surface</h4>
+                    <p>Watch complexity compound with every feature and integration</p>
+                </a>
+                <a href="mental-models/defense-in-depth.html" class="model-card">
+                    <div class="model-icon">🛡️</div>
+                    <h4>Defense in Depth</h4>
+                    <p>Visualize how layered security contains failure</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="audio-section">
+        <div class="container">
+            <h3 class="content-heading">Audio Fireflies</h3>
+            <p class="section-description">
+                Micro reflections for leaders on the move—2-3 minute contemplative pieces for moments between meetings.
+            </p>
+            <a href="audio/index.html" class="cta-link">Explore Audio →</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built with care for security leaders who think deeply.</p>
+            <p><a href="about.html">About & Support</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>"""
+
+open(os.path.join(DIST, "index.html"), "w", encoding='utf-8').write(index_html)
+
+print(f"✨ Generated site in dist/")
+print(f"   📝 {len(epiphanies)} epiphanies")
+print(f"   📖 {len(reflections)} reflections")
+print(f"   🧠 Mental models")
+print(f"   🎧 Audio section")
+print(f"   ℹ️  About page")
