@@ -56,8 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    // Doorway toggle functionality
+    // Doorway toggle functionality - ONE AT A TIME
     const doorwayToggles = document.querySelectorAll('.doorway-toggle');
+    const allColumns = document.querySelectorAll('.content-column');
 
     doorwayToggles.forEach(toggle => {
         toggle.addEventListener('click', (e) => {
@@ -68,29 +69,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!targetColumn) return;
 
-            // Toggle active state
-            const isActive = toggle.classList.contains('active');
+            // Check if this column is currently the only one visible
+            const isCurrentlyActive = toggle.classList.contains('active');
+            const activeCount = document.querySelectorAll('.doorway-toggle.active').length;
+            const isOnlyActive = isCurrentlyActive && activeCount === 1;
 
-            if (isActive) {
-                // Hide column
-                toggle.classList.remove('active');
-                targetColumn.classList.add('hidden');
+            if (isOnlyActive) {
+                // If clicking the only active column, show all columns
+                doorwayToggles.forEach(t => {
+                    t.classList.add('active');
+                    const indicator = t.querySelector('.doorway-indicator');
+                    if (indicator) indicator.textContent = '−';
+                });
 
-                // Change indicator to +
-                const indicator = toggle.querySelector('.doorway-indicator');
-                if (indicator) indicator.textContent = '+';
+                allColumns.forEach(col => {
+                    col.classList.remove('hidden');
+                });
             } else {
-                // Show column
-                toggle.classList.add('active');
-                targetColumn.classList.remove('hidden');
+                // Hide all other columns, show only this one
+                doorwayToggles.forEach(t => {
+                    if (t === toggle) {
+                        t.classList.add('active');
+                        const indicator = t.querySelector('.doorway-indicator');
+                        if (indicator) indicator.textContent = '−';
+                    } else {
+                        t.classList.remove('active');
+                        const indicator = t.querySelector('.doorway-indicator');
+                        if (indicator) indicator.textContent = '+';
+                    }
+                });
 
-                // Change indicator to −
-                const indicator = toggle.querySelector('.doorway-indicator');
-                if (indicator) indicator.textContent = '−';
-            }
+                allColumns.forEach(col => {
+                    if (col === targetColumn) {
+                        col.classList.remove('hidden');
+                    } else {
+                        col.classList.add('hidden');
+                    }
+                });
 
-            // Smooth scroll to content section if revealing
-            if (!isActive) {
+                // Smooth scroll to the revealed column
                 setTimeout(() => {
                     targetColumn.scrollIntoView({
                         behavior: 'smooth',

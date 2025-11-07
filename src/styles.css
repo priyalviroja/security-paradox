@@ -439,8 +439,14 @@ a:hover {
 }
 
 .doorway-toggle:not(.active) {
-  opacity: 0.6;
+  opacity: 0.4;
   border-color: var(--border-subtle);
+  transform: scale(0.95);
+}
+
+.doorway-toggle:not(.active):hover {
+  opacity: 0.7;
+  transform: scale(0.98);
 }
 
 .doorway-toggle:not(.active) .doorway-indicator {
@@ -451,6 +457,10 @@ a:hover {
 .doorway-toggle.active .doorway-indicator {
   background: var(--accent-primary);
   transform: rotate(0deg);
+}
+
+.doorway-toggle.active {
+  border-width: 2px;
 }
 
 .doorway-toggle:hover .doorway-indicator {
@@ -1166,29 +1176,55 @@ nav.hidden {
   pointer-events: none;
 }
 
-/* Adjust grid when columns are hidden */
-.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(2)) {
+/* Adjust grid when columns are hidden - ONE AT A TIME MODE */
+/* When only one column is visible, make it full width and centered */
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(2)):not(:has(.content-column.hidden:nth-child(3))) {
   grid-template-columns: 1fr;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(3)) {
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(3)):not(:has(.content-column.hidden:nth-child(2))) {
   grid-template-columns: 1fr;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.content-grid:has(.content-column.hidden:nth-child(2)):has(.content-column.hidden:nth-child(3)) {
+.content-grid:has(.content-column.hidden:nth-child(2)):has(.content-column.hidden:nth-child(3)):not(:has(.content-column.hidden:nth-child(1))) {
   grid-template-columns: 1fr;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.content-grid:has(.content-column.hidden:nth-child(1)):not(:has(.content-column.hidden:nth-child(2))):not(:has(.content-column.hidden:nth-child(3))) {
-  grid-template-columns: 1fr 1fr;
+/* Focused mode: single column gets special styling */
+.content-column:not(.hidden):only-child,
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(2)) .content-column:not(.hidden),
+.content-grid:has(.content-column.hidden:nth-child(1)):has(.content-column.hidden:nth-child(3)) .content-column:not(.hidden),
+.content-grid:has(.content-column.hidden:nth-child(2)):has(.content-column.hidden:nth-child(3)) .content-column:not(.hidden) {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 156, 191, 0.3);
+  border-width: 2px;
+  animation: focusGlow 2s ease-in-out infinite;
 }
 
-.content-grid:has(.content-column.hidden:nth-child(2)):not(:has(.content-column.hidden:nth-child(1))):not(:has(.content-column.hidden:nth-child(3))) {
-  grid-template-columns: 1fr 1fr;
+@keyframes focusGlow {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(124, 156, 191, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 12px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(124, 156, 191, 0.5),
+      0 0 40px rgba(124, 156, 191, 0.2);
+  }
 }
 
-.content-grid:has(.content-column.hidden:nth-child(3)):not(:has(.content-column.hidden:nth-child(1))):not(:has(.content-column.hidden:nth-child(2))) {
-  grid-template-columns: 1fr 1fr;
+/* Content section background dims when in focused mode */
+.content-section:has(.content-column.hidden) {
+  background: linear-gradient(to bottom, var(--bg-deep), var(--bg-card));
 }
 
 .mb-xl {
