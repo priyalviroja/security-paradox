@@ -169,10 +169,10 @@ index_html = """<!DOCTYPE html>
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">The Security Paradox</h1>
-            <p class="hero-subtitle">Security leadership is not the science of control — it's the art of understanding chaos.</p>
-            <p class="hero-description">
-                For CISOs and security leaders who know that the hardest problems aren't technical—they're human, organizational, cultural.
-            </p>
+            <div class="hero-subtitle">
+                <p class="hero-tagline">Security leadership is not the <strong>science of control</strong> — it's the <strong>art of understanding chaos</strong>.</p>
+                <p class="hero-audience">For CISOs and security leaders who know that the hardest problems aren't <strong>technical</strong>—they're <strong>human, organizational, cultural</strong>.</p>
+            </div>
         </div>
     </section>
 
