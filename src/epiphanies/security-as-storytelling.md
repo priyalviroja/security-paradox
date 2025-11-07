@@ -5,7 +5,7 @@ readTime: "3 min"
 ---
 
 <div class="epiphany-section">
-<parameter name="epiphany-label">The Story</span>
+<span class="epiphany-label">The Story</span>
 
 A CISO presented to the board: "We need $2M for a SIEM upgrade. Our current system has 47% coverage and lacks ML-based anomaly detection."
 

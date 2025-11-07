@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response Timeline - Mental Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-serif);
+        }
+
+        .model-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-md);
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .timeline-canvas {
+            width: 100%;
+            max-width: 900px;
+            height: 500px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            margin: var(--space-lg) 0;
+            padding: var(--space-lg);
+        }
+        
+        .timeline-axis {
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: var(--border-subtle);
+        }
+        
+        .timeline-phase {
+            position: absolute;
+            bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-phase:hover {
+            transform: translateY(-10px);
+        }
+        
+        .phase-marker {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: 3px solid var(--bg-elevated);
+            box-shadow: 0 0 0 2px var(--accent-primary);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-phase:hover .phase-marker {
+            transform: scale(1.5);
+            box-shadow: 0 0 20px var(--accent-primary);
+        }
+        
+        .phase-label {
+            font-size: 0.75rem;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .phase-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            margin-top: 0.25rem;
+        }
+        
+        .phase-bar {
+            position: absolute;
+            bottom: 150px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+        
+        .phase-bar:hover {
+            opacity: 1;
+            transform: scaleY(1.2);
+        }
+        
+        .phase-bar.detect {
+            background: rgba(212, 165, 116, 0.3);
+            border: 2px solid #d4a574;
+        }
+        
+        .phase-bar.respond {
+            background: rgba(124, 156, 191, 0.3);
+            border: 2px solid #7c9cbf;
+        }
+        
+        .phase-bar.contain {
+            background: rgba(143, 188, 143, 0.3);
+            border: 2px solid #8fbc8f;
+        }
+        
+        .phase-bar.recover {
+            background: rgba(184, 160, 199, 0.3);
+            border: 2px solid #b8a0c7;
+        }
+        
+        .cost-indicator {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            right: 50px;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .cost-bar {
+            flex: 1;
+            background: linear-gradient(to top, rgba(255, 107, 107, 0.3), rgba(255, 107, 107, 0.1));
+            border: 2px solid #ff6b6b;
+            border-radius: 8px 8px 0 0;
+            margin: 0 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .cost-bar:hover {
+            background: linear-gradient(to top, rgba(255, 107, 107, 0.5), rgba(255, 107, 107, 0.2));
+        }
+        
+        .cost-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            color: #ff6b6b;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .model-description {
+            max-width: 700px;
+            text-align: center;
+            margin-top: var(--space-md);
+        }
+        
+        .model-insight {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+            max-width: 700px;
+        }
+        
+        .control-btn {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin: var(--space-sm);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+        }
+        
+        .stats-display {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+            text-align: center;
+        }
+        
+        .stats-display strong {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="model-container">
+        <h1>Incident Response Timeline</h1>
+        <p class="model-description">
+            Time is the enemy in incident response. Watch how cost compounds with every hour of delay.
+            The faster you detect and respond, the less damage an attacker can do.
+        </p>
+        
+        <div class="timeline-canvas" id="canvas">
+            <!-- Timeline will be dynamically created -->
+        </div>
+        
+        <div class="stats-display" id="stats">
+            Total Time: <strong id="totalTime">0</strong> hours | 
+            Estimated Cost: <strong id="totalCost">$0</strong>
+        </div>
+        
+        <div>
+            <button class="control-btn" onclick="showScenario('slow')">Slow Response (Industry Average)</button>
+            <button class="control-btn" onclick="showScenario('fast')">Fast Response (Best Practice)</button>
+            <button class="control-btn" onclick="showScenario('excellent')">Excellent Response (Top 10%)</button>
+        </div>
+        
+        <div class="model-insight">
+            "The cost of a breach isn't just the breach itself—it's the time you take to detect and respond. 
+            Every hour of delay multiplies the damage. Speed is your best defense."
+        </div>
+    </div>
+    
+    <script>
+        const scenarios = {
+            slow: {
+                name: 'Industry Average',
+                phases: [
+                    { name: 'Breach Occurs', time: 0, cost: 0 },
+                    { name: 'Detection', time: 200 * 24, cost: 500000 }, // 200 days
+                    { name: 'Response', time: 50 * 24, cost: 1000000 },  // 50 days
+                    { name: 'Containment', time: 30 * 24, cost: 2000000 }, // 30 days
+                    { name: 'Recovery', time: 60 * 24, cost: 5000000 }  // 60 days
+                ],
+                totalDays: 340
+            },
+            fast: {
+                name: 'Best Practice',
+                phases: [
+                    { name: 'Breach Occurs', time: 0, cost: 0 },
+                    { name: 'Detection', time: 24, cost: 50000 }, // 1 day
+                    { name: 'Response', time: 8, cost: 100000 },  // 8 hours
+                    { name: 'Containment', time: 16, cost: 200000 }, // 16 hours
+                    { name: 'Recovery', time: 7 * 24, cost: 500000 }  // 7 days
+                ],
+                totalDays: 10
+            },
+            excellent: {
+                name: 'Top 10%',
+                phases: [
+                    { name: 'Breach Occurs', time: 0, cost: 0 },
+                    { name: 'Detection', time: 2, cost: 10000 }, // 2 hours
+                    { name: 'Response', time: 1, cost: 20000 },  // 1 hour
+                    { name: 'Containment', time: 4, cost: 50000 }, // 4 hours
+                    { name: 'Recovery', time: 2 * 24, cost: 100000 }  // 2 days
+                ],
+                totalDays: 3
+            }
+        };
+        
+        function showScenario(scenarioName) {
+            const scenario = scenarios[scenarioName];
+            const canvas = document.getElementById('canvas');
+            canvas.innerHTML = '';
+            
+            // Create timeline axis
+            const axis = document.createElement('div');
+            axis.className = 'timeline-axis';
+            canvas.appendChild(axis);
+            
+            // Create cost indicators
+            const costContainer = document.createElement('div');
+            costContainer.className = 'cost-indicator';
+            
+            let cumulativeTime = 0;
+            let cumulativeCost = 0;
+            const canvasWidth = 800; // approximate usable width
+            
+            scenario.phases.forEach((phase, i) => {
+                if (i === 0) return; // Skip "Breach Occurs"
+                
+                cumulativeTime += phase.time;
+                cumulativeCost += phase.cost;
+                
+                // Calculate position
+                const totalTime = scenario.phases.reduce((sum, p) => sum + p.time, 0);
+                const position = (cumulativeTime / totalTime) * canvasWidth;
+                
+                // Create phase marker
+                const phaseEl = document.createElement('div');
+                phaseEl.className = 'timeline-phase';
+                phaseEl.style.left = (50 + position) + 'px';
+                
+                phaseEl.innerHTML = `
+                    <div class="phase-marker"></div>
+                    <div class="phase-label">${phase.name}</div>
+                    <div class="phase-time">${formatTime(phase.time)}</div>
+                `;
+                
+                canvas.appendChild(phaseEl);
+                
+                // Create phase bar
+                const prevTime = scenario.phases.slice(0, i).reduce((sum, p) => sum + p.time, 0);
+                const prevPosition = (prevTime / totalTime) * canvasWidth;
+                const barWidth = position - prevPosition;
+                
+                const barEl = document.createElement('div');
+                barEl.className = `phase-bar ${phase.name.toLowerCase().replace(' ', '-')}`;
+                barEl.style.left = (50 + prevPosition) + 'px';
+                barEl.style.width = barWidth + 'px';
+                barEl.textContent = phase.name;
+                
+                canvas.appendChild(barEl);
+                
+                // Create cost bar
+                const maxCost = Math.max(...scenario.phases.map(p => p.cost));
+                const costHeight = (phase.cost / maxCost) * 180;
+                
+                const costBar = document.createElement('div');
+                costBar.className = 'cost-bar';
+                costBar.style.height = costHeight + 'px';
+                costBar.innerHTML = `<div class="cost-label">$${(phase.cost / 1000).toFixed(0)}K</div>`;
+                
+                costContainer.appendChild(costBar);
+            });
+            
+            canvas.appendChild(costContainer);
+            
+            // Update stats
+            document.getElementById('totalTime').textContent = formatTime(cumulativeTime);
+            document.getElementById('totalCost').textContent = '$' + (cumulativeCost / 1000000).toFixed(1) + 'M';
+        }
+        
+        function formatTime(hours) {
+            if (hours < 24) {
+                return hours + 'h';
+            } else {
+                const days = Math.floor(hours / 24);
+                return days + 'd';
+            }
+        }
+        
+        // Initial render
+        showScenario('slow');
+    </script>
+</body>
+</html>
+

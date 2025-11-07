@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Boundaries - Mental Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-serif);
+        }
+
+        .model-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-md);
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .trust-canvas {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            margin: var(--space-lg) 0;
+        }
+        
+        .trust-zone {
+            position: absolute;
+            border: 2px dashed var(--accent-primary);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .trust-zone:hover {
+            border-style: solid;
+            border-width: 3px;
+            background: rgba(124, 156, 191, 0.1);
+            z-index: 5;
+        }
+        
+        .trust-zone.high-trust {
+            border-color: #8fbc8f;
+            background: rgba(143, 188, 143, 0.05);
+        }
+        
+        .trust-zone.medium-trust {
+            border-color: #d4a574;
+            background: rgba(212, 165, 116, 0.05);
+        }
+        
+        .trust-zone.low-trust {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.05);
+        }
+        
+        .zone-label {
+            font-size: 0.75rem;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .zone-description {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+        }
+        
+        .trust-flow {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), transparent);
+            animation: flowAnimation 2s linear infinite;
+        }
+        
+        @keyframes flowAnimation {
+            0% { opacity: 0; transform: scaleX(0); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: scaleX(1); }
+        }
+        
+        .model-description {
+            max-width: 700px;
+            text-align: center;
+            margin-top: var(--space-md);
+        }
+        
+        .model-insight {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+            max-width: 700px;
+        }
+        
+        .control-btn {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin: var(--space-sm);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+        }
+        
+        .legend {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="model-container">
+        <h1>Trust Boundaries</h1>
+        <p class="model-description">
+            Trust is not binary—it's a spectrum. Click zones to see how trust flows through your architecture.
+            Every boundary is a decision about where to verify, where to monitor, and where to contain.
+        </p>
+        
+        <div class="trust-canvas" id="canvas">
+            <!-- Trust zones will be dynamically created -->
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="border-color: #8fbc8f; background: rgba(143, 188, 143, 0.1);"></div>
+                <span>High Trust (Verify Periodically)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="border-color: #d4a574; background: rgba(212, 165, 116, 0.1);"></div>
+                <span>Medium Trust (Verify Continuously)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="border-color: #ff6b6b; background: rgba(255, 107, 107, 0.1);"></div>
+                <span>Low Trust (Verify Everything)</span>
+            </div>
+        </div>
+        
+        <div>
+            <button class="control-btn" onclick="showZeroTrust()">Zero Trust Model</button>
+            <button class="control-btn" onclick="showPerimeter()">Perimeter Model</button>
+            <button class="control-btn" onclick="showHybrid()">Hybrid Model</button>
+        </div>
+        
+        <div class="model-insight">
+            "Trust is not the opposite of security—it's a control surface. The question isn't whether to trust, 
+            but where to place trust boundaries and how to verify them continuously."
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        
+        const models = {
+            zeroTrust: [
+                { x: 50, y: 50, w: 150, h: 100, trust: 'low', label: 'Internet', desc: 'Untrusted' },
+                { x: 250, y: 50, w: 150, h: 100, trust: 'low', label: 'DMZ', desc: 'Verify All' },
+                { x: 450, y: 50, w: 150, h: 100, trust: 'medium', label: 'Internal', desc: 'Verify Continuously' },
+                { x: 250, y: 200, w: 150, h: 100, trust: 'medium', label: 'Applications', desc: 'Micro-segmented' },
+                { x: 450, y: 200, w: 150, h: 100, trust: 'medium', label: 'Data', desc: 'Encrypted + Monitored' },
+                { x: 350, y: 350, w: 150, h: 100, trust: 'high', label: 'Critical Assets', desc: 'Minimal Access' }
+            ],
+            perimeter: [
+                { x: 50, y: 100, w: 300, h: 300, trust: 'low', label: 'Outside', desc: 'Untrusted - Blocked' },
+                { x: 400, y: 100, w: 350, h: 300, trust: 'high', label: 'Inside Perimeter', desc: 'Trusted - Minimal Verification' }
+            ],
+            hybrid: [
+                { x: 50, y: 50, w: 200, h: 150, trust: 'low', label: 'Public Cloud', desc: 'Verify All' },
+                { x: 300, y: 50, w: 200, h: 150, trust: 'medium', label: 'Private Cloud', desc: 'Verify Continuously' },
+                { x: 550, y: 50, w: 200, h: 150, trust: 'high', label: 'On-Prem Core', desc: 'Verify Periodically' },
+                { x: 150, y: 250, w: 200, h: 150, trust: 'medium', label: 'SaaS Apps', desc: 'Identity-Based' },
+                { x: 400, y: 250, w: 200, h: 150, trust: 'medium', label: 'Mobile/Remote', desc: 'Context-Aware' }
+            ]
+        };
+        
+        function renderModel(modelName) {
+            canvas.innerHTML = '';
+            const zones = models[modelName];
+            
+            zones.forEach((zone, i) => {
+                const zoneEl = document.createElement('div');
+                zoneEl.className = `trust-zone ${zone.trust}-trust`;
+                zoneEl.style.left = zone.x + 'px';
+                zoneEl.style.top = zone.y + 'px';
+                zoneEl.style.width = zone.w + 'px';
+                zoneEl.style.height = zone.h + 'px';
+                zoneEl.style.animationDelay = (i * 0.1) + 's';
+                
+                zoneEl.innerHTML = `
+                    <div class="zone-label">${zone.label}</div>
+                    <div class="zone-description">${zone.desc}</div>
+                `;
+                
+                zoneEl.addEventListener('click', () => {
+                    zoneEl.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        zoneEl.style.transform = 'scale(1)';
+                    }, 300);
+                });
+                
+                canvas.appendChild(zoneEl);
+            });
+        }
+        
+        function showZeroTrust() {
+            renderModel('zeroTrust');
+        }
+        
+        function showPerimeter() {
+            renderModel('perimeter');
+        }
+        
+        function showHybrid() {
+            renderModel('hybrid');
+        }
+        
+        // Initial render
+        showZeroTrust();
+    </script>
+</body>
+</html>
+

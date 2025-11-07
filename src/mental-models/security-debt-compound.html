@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Debt Compounding - Mental Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-serif);
+        }
+
+        .model-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-md);
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .debt-canvas {
+            width: 100%;
+            max-width: 900px;
+            height: 500px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            margin: var(--space-lg) 0;
+            padding: var(--space-lg);
+        }
+        
+        .chart-area {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            right: 40px;
+            top: 40px;
+        }
+        
+        .axis {
+            position: absolute;
+            background: var(--border-subtle);
+        }
+        
+        .axis-y {
+            left: 60px;
+            top: 40px;
+            bottom: 60px;
+            width: 2px;
+        }
+        
+        .axis-x {
+            left: 60px;
+            right: 40px;
+            bottom: 60px;
+            height: 2px;
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-size: 0.75rem;
+            font-family: var(--font-sans);
+            color: var(--text-muted);
+        }
+        
+        .debt-line {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            right: 40px;
+            height: calc(100% - 100px);
+        }
+        
+        .debt-segment {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            background: linear-gradient(to top, rgba(255, 107, 107, 0.6), rgba(255, 107, 107, 0.2));
+            border: 2px solid #ff6b6b;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .debt-segment:hover {
+            background: linear-gradient(to top, rgba(255, 107, 107, 0.8), rgba(255, 107, 107, 0.4));
+            transform: scaleX(1.1);
+            z-index: 10;
+        }
+        
+        .debt-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            color: #ff6b6b;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .quarter-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            color: var(--text-muted);
+        }
+        
+        .paydown-line {
+            position: absolute;
+            height: 3px;
+            background: #8fbc8f;
+            box-shadow: 0 0 10px rgba(143, 188, 143, 0.5);
+            z-index: 5;
+        }
+        
+        .model-description {
+            max-width: 700px;
+            text-align: center;
+            margin-top: var(--space-md);
+        }
+        
+        .model-insight {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+            max-width: 700px;
+        }
+        
+        .control-btn {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin: var(--space-sm);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+        }
+        
+        .control-btn.paydown {
+            background: #8fbc8f;
+        }
+        
+        .stats-display {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+            text-align: center;
+        }
+        
+        .stats-display strong {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        .warning {
+            color: #ff6b6b;
+        }
+        
+        .success {
+            color: #8fbc8f;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">The Security Paradox</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#epiphanies">Epiphanies</a></li>
+                <li><a href="../index.html#reflections">Reflections</a></li>
+                <li><a href="../index.html#mental-models">Mental Models</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="model-container">
+        <h1>Security Debt Compounding</h1>
+        <p class="model-description">
+            Security debt compounds like financial debt—skip security today, pay exponentially more tomorrow.
+            Watch how small shortcuts accumulate into catastrophic risk over time.
+        </p>
+        
+        <div class="debt-canvas" id="canvas">
+            <div class="axis axis-y"></div>
+            <div class="axis axis-x"></div>
+            <div class="axis-label" style="left: 10px; top: 20px; writing-mode: vertical-rl; transform: rotate(180deg);">
+                Security Debt (Risk Units)
+            </div>
+            <div class="axis-label" style="bottom: 20px; right: 50%; transform: translateX(50%);">
+                Time (Quarters)
+            </div>
+            <div class="debt-line" id="debtLine"></div>
+        </div>
+        
+        <div class="stats-display" id="stats">
+            Current Debt: <strong id="currentDebt" class="warning">0</strong> risk units | 
+            Remediation Cost: <strong id="remediationCost" class="warning">$0</strong>
+        </div>
+        
+        <div>
+            <button class="control-btn" onclick="addDebt()">Ship Feature (Skip Security)</button>
+            <button class="control-btn paydown" onclick="paydownDebt()">Pay Down Debt (20% Capacity)</button>
+            <button class="control-btn" onclick="reset()">Reset</button>
+        </div>
+        
+        <div class="model-insight">
+            "Security debt doesn't just accumulate—it compounds. Every shortcut makes the next one easier to justify, 
+            and the cost of remediation grows exponentially. The best time to pay it down was yesterday. 
+            The second best time is now."
+        </div>
+    </div>
+    
+    <script>
+        let quarters = 0;
+        let debtHistory = [0];
+        const compoundRate = 1.3; // Debt grows 30% per quarter if not addressed
+        const newDebtPerFeature = 10;
+        const paydownRate = 0.15; // Can pay down 15% per quarter
+        
+        function render() {
+            const debtLine = document.getElementById('debtLine');
+            debtLine.innerHTML = '';
+            
+            const maxDebt = Math.max(...debtHistory, 100);
+            const chartHeight = 400; // approximate height
+            const chartWidth = 800; // approximate width
+            const segmentWidth = Math.min(40, chartWidth / (debtHistory.length + 2));
+            
+            debtHistory.forEach((debt, i) => {
+                const segment = document.createElement('div');
+                segment.className = 'debt-segment';
+                
+                const height = (debt / maxDebt) * chartHeight;
+                segment.style.height = height + 'px';
+                segment.style.left = (i * (segmentWidth + 10)) + 'px';
+                segment.style.width = segmentWidth + 'px';
+                
+                const label = document.createElement('div');
+                label.className = 'debt-label';
+                label.textContent = Math.round(debt);
+                segment.appendChild(label);
+                
+                const quarterLabel = document.createElement('div');
+                quarterLabel.className = 'quarter-label';
+                quarterLabel.textContent = 'Q' + (i + 1);
+                segment.appendChild(quarterLabel);
+                
+                segment.addEventListener('click', () => {
+                    segment.style.transform = 'scaleY(1.05)';
+                    setTimeout(() => {
+                        segment.style.transform = 'scaleY(1)';
+                    }, 300);
+                });
+                
+                debtLine.appendChild(segment);
+            });
+            
+            updateStats();
+        }
+        
+        function addDebt() {
+            quarters++;
+            const lastDebt = debtHistory[debtHistory.length - 1];
+            const compoundedDebt = lastDebt * compoundRate;
+            const newDebt = compoundedDebt + newDebtPerFeature;
+            debtHistory.push(newDebt);
+            render();
+        }
+        
+        function paydownDebt() {
+            if (debtHistory.length === 1) return; // Can't pay down if no debt
+            
+            quarters++;
+            const lastDebt = debtHistory[debtHistory.length - 1];
+            const paidDown = lastDebt * (1 - paydownRate);
+            debtHistory.push(Math.max(0, paidDown));
+            render();
+        }
+        
+        function reset() {
+            quarters = 0;
+            debtHistory = [0];
+            render();
+        }
+        
+        function updateStats() {
+            const currentDebt = debtHistory[debtHistory.length - 1];
+            const remediationCost = currentDebt * 50000; // $50K per risk unit
+            
+            document.getElementById('currentDebt').textContent = Math.round(currentDebt);
+            document.getElementById('remediationCost').textContent = '$' + (remediationCost / 1000000).toFixed(1) + 'M';
+            
+            // Update colors based on debt level
+            const debtEl = document.getElementById('currentDebt');
+            const costEl = document.getElementById('remediationCost');
+            
+            if (currentDebt < 20) {
+                debtEl.className = 'success';
+                costEl.className = 'success';
+            } else if (currentDebt < 50) {
+                debtEl.className = '';
+                costEl.className = '';
+            } else {
+                debtEl.className = 'warning';
+                costEl.className = 'warning';
+            }
+        }
+        
+        // Initial render
+        render();
+    </script>
+</body>
+</html>
+
