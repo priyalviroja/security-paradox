@@ -216,6 +216,7 @@ index_html = """<!DOCTYPE html>
         <div class="container">
             <div class="content-grid">
 
+                <!-- Column 1: The Journey of Epiphanies -->
                 <div class="content-column">
                     <h3 class="content-heading">The Journey of Epiphanies</h3>
                     <p class="journey-intro">11 insights that build upon each other, taking you from awakening to integration.</p>
@@ -254,15 +255,17 @@ for act_name, act_slug, act_items in acts:
 index_html += """                    </div>
                 </div>
 
+                <!-- Column 2: Recent Reflections -->
                 <div class="content-column">
                     <h3 class="content-heading">Recent Reflections</h3>
+                    <p class="column-intro">Longer essays exploring security leadership, culture, and transformation.</p>
                     <div class="content-list">
 """
 
 # Add reflections
 for item in reflections[:3]:
     index_html += f"""                        <a href="reflections/{item['file']}" class="content-item">
-                            <h4>{item['title']}</h4>
+                            <h4 class="content-item-title">{item['title']}</h4>
                             <span class="read-time">{item['readTime']}</span>
                         </a>
 """
@@ -270,24 +273,28 @@ for item in reflections[:3]:
 index_html += """                    </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
+                <!-- Column 3: Mental Models -->
+                <div class="content-column">
+                    <h3 class="content-heading">Mental Models</h3>
+                    <p class="column-intro">Interactive visualizations of abstract security truths.</p>
+                    <div class="content-list">
+                        <a href="mental-models/attack-surface.html" class="content-item model-item">
+                            <div class="model-icon-small">🎯</div>
+                            <div class="model-content">
+                                <h4 class="content-item-title">Attack Surface</h4>
+                                <p class="model-description">Watch complexity compound with every feature</p>
+                            </div>
+                        </a>
+                        <a href="mental-models/defense-in-depth.html" class="content-item model-item">
+                            <div class="model-icon-small">🛡️</div>
+                            <div class="model-content">
+                                <h4 class="content-item-title">Defense in Depth</h4>
+                                <p class="model-description">Visualize how layered security contains failure</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
-    <section class="mental-models-section">
-        <div class="container">
-            <h3 class="content-heading">Mental Models</h3>
-            <div class="models-grid">
-                <a href="mental-models/attack-surface.html" class="model-card">
-                    <div class="model-icon">🎯</div>
-                    <h4>Attack Surface</h4>
-                    <p>Watch complexity compound with every feature and integration</p>
-                </a>
-                <a href="mental-models/defense-in-depth.html" class="model-card">
-                    <div class="model-icon">🛡️</div>
-                    <h4>Defense in Depth</h4>
-                    <p>Visualize how layered security contains failure</p>
-                </a>
             </div>
         </div>
     </section>
