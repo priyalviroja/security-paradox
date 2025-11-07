@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>console.log('The Security Paradox site loaded'));
