@@ -50,3 +50,18 @@ They ask: "What do we need to see to make better decisions?" Not: "What can we s
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-noise-of-compliance.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Noise of Compliance</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="speed-is-not-velocity.html" class="nav-link">
+<span class="nav-title">Speed Is Not Velocity</span>
+<span class="nav-context">If metrics shape reality, does speed of action matter more than direction?</span>
+</a>
+</div>
+</div>

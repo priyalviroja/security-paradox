@@ -56,3 +56,18 @@ Humans aren't the weakest link. They're the most adaptable, creative, and resili
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="trust-as-a-control-surface.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">Trust as a Control Surface</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-security-theater.html" class="nav-link">
+<span class="nav-title">The Security Theater</span>
+<span class="nav-context">If humans are sensors, how do we distinguish signal from noise?</span>
+</a>
+</div>
+</div>

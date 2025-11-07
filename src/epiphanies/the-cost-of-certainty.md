@@ -2,7 +2,16 @@
 title: "The Cost of Certainty"
 category: "epiphany"
 readTime: "3 min"
+order: 2
+prev: "the-mirage-of-control"
+next: "the-noise-of-compliance"
+nextContext: "So if certainty is expensive, why do we perform it so loudly?"
 ---
+
+<div class="journey-marker">
+<span class="journey-label">Act I: Awakening</span>
+<span class="journey-position">Epiphany 2 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
@@ -62,3 +71,28 @@ The best security leaders don't promise certainty. They promise resilience.
 </div>
 </div>
 
+
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-noise-of-compliance.html" class="nav-link">
+<span class="nav-title">The Noise of Compliance</span>
+<span class="nav-context">So if certainty is expensive, why do we perform it so loudly?</span>
+</a>
+</div>
+</div>
+
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-mirage-of-control.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Mirage of Control</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-noise-of-compliance.html" class="nav-link">
+<span class="nav-title">The Noise of Compliance</span>
+<span class="nav-context">So if certainty is expensive, why do we perform it so loudly?</span>
+</a>
+</div>
+</div>

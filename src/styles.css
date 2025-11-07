@@ -306,6 +306,30 @@ a:hover {
   opacity: 0.5;
 }
 
+/* Journey Markers */
+.journey-marker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-card);
+  border-radius: 8px;
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.journey-label {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.journey-position {
+  color: var(--text-muted);
+}
+
 /* Epiphany-specific styles */
 .epiphany-section {
   margin: var(--space-xl) 0;
@@ -339,6 +363,222 @@ a:hover {
   line-height: 1.8;
   opacity: 0;
   animation: fadeIn 1s ease-out 2s forwards;
+  color: var(--text-primary);
+}
+
+/* Epiphany Navigation */
+.epiphany-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.epiphany-navigation .nav-prev {
+  grid-column: 1;
+}
+
+.epiphany-navigation .nav-next {
+  grid-column: 2;
+}
+
+.epiphany-navigation .nav-complete {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.nav-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.nav-direction {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.nav-link {
+  display: block;
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.nav-link:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link-home {
+  display: inline-block;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--accent-primary);
+  color: var(--bg-deep);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  font-weight: 600;
+}
+
+.nav-link-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 156, 191, 0.3);
+}
+
+.nav-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  font-weight: 400;
+}
+
+.nav-link-home .nav-title {
+  color: var(--bg-deep);
+  font-size: 1.2rem;
+}
+
+.nav-context {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.nav-link-home .nav-context {
+  color: var(--bg-elevated);
+}
+
+/* Responsive navigation */
+@media (max-width: 768px) {
+  .epiphany-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .epiphany-navigation .nav-prev,
+  .epiphany-navigation .nav-next {
+    grid-column: 1;
+  }
+}
+
+/* Journey Presentation on Home Page */
+.journey-intro {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+
+.journey-start {
+  margin: var(--space-lg) 0;
+}
+
+.journey-begin-btn {
+  display: inline-block;
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-deep);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 16px rgba(124, 156, 191, 0.2);
+}
+
+.journey-begin-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(124, 156, 191, 0.4);
+}
+
+.btn-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+}
+
+.btn-subtitle {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.journey-preview {
+  margin-top: var(--space-xl);
+}
+
+.act-group {
+  margin-bottom: var(--space-lg);
+}
+
+.act-title {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+.journey-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.journey-item:hover {
+  border-color: var(--accent-primary);
+  transform: translateX(4px);
+}
+
+.journey-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--accent-primary);
+  color: var(--bg-deep);
+  border-radius: 50%;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.journey-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
   color: var(--text-primary);
 }
 

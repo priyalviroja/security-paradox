@@ -53,3 +53,18 @@ The teams that move fastest in the long run are the ones who build security in f
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-paradox-of-visibility.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Paradox of Visibility</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-invisible-attacker.html" class="nav-link">
+<span class="nav-title">The Invisible Attacker in the Org Chart</span>
+<span class="nav-context">If direction matters, what invisible forces are steering us wrong?</span>
+</a>
+</div>
+</div>

@@ -51,3 +51,18 @@ The question is: are you telling that story well?
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-invisible-attacker.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Invisible Attacker in the Org Chart</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="trust-as-a-control-surface.html" class="nav-link">
+<span class="nav-title">Trust as a Control Surface</span>
+<span class="nav-context">If security is narrative, what role does trust play in our story?</span>
+</a>
+</div>
+</div>

@@ -2,7 +2,16 @@
 title: "The Noise of Compliance"
 category: "epiphany"
 readTime: "3 min"
+order: 3
+prev: "the-cost-of-certainty"
+next: "the-paradox-of-visibility"
+nextContext: "If compliance is theater, what should we actually be measuring?"
 ---
+
+<div class="journey-marker">
+<span class="journey-label">Act I: Awakening</span>
+<span class="journey-position">Epiphany 3 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
@@ -44,3 +53,18 @@ If the answer is "none," it's noise.
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-cost-of-certainty.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Cost of Certainty</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-paradox-of-visibility.html" class="nav-link">
+<span class="nav-title">The Paradox of Visibility</span>
+<span class="nav-context">If compliance is theater, what should we actually be measuring?</span>
+</a>
+</div>
+</div>

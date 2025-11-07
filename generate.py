@@ -43,6 +43,10 @@ def render_markdown_section(section_name, output_dir):
         read_time_match = re.search(r'^readTime:\s*"(.*?)"', text, re.M)
         read_time = read_time_match.group(1) if read_time_match else ""
 
+        # Extract order for epiphanies
+        order_match = re.search(r'^order:\s*(\d+)', text, re.M)
+        order = int(order_match.group(1)) if order_match else 999
+
         body_md = re.sub(r'^---[\s\S]+?---\n*', '', text)
         html = markdown.markdown(body_md)
 
@@ -85,7 +89,10 @@ def render_markdown_section(section_name, output_dir):
 
         output_file = os.path.join(output_dir, mdfile.replace('.md', '.html'))
         open(output_file, "w", encoding='utf-8').write(page)
-        items.append({'title': title, 'file': mdfile.replace('.md', '.html'), 'readTime': read_time})
+        items.append({'title': title, 'file': mdfile.replace('.md', '.html'), 'readTime': read_time, 'order': order})
+
+    # Sort by order (for epiphanies journey)
+    items.sort(key=lambda x: x['order'])
 
     return items
 
@@ -180,7 +187,7 @@ index_html = """<!DOCTYPE html>
                     <p class="doorway-description">
                         Short, 3-minute ideas that challenge assumptions about security, control, and leadership.
                     </p>
-                    <span class="doorway-count">{} insights</span>
+                    <span class="doorway-count">11 insights</span>
                 </a>
 
                 <a href="#reflections" class="doorway" id="reflections">
@@ -189,7 +196,7 @@ index_html = """<!DOCTYPE html>
                     <p class="doorway-description">
                         Longer essays exploring the paradoxes of security leadership and organizational resilience.
                     </p>
-                    <span class="doorway-count">{} essays</span>
+                    <span class="doorway-count">3 essays</span>
                 </a>
 
                 <a href="#mental-models" class="doorway" id="mental-models">
@@ -210,16 +217,38 @@ index_html = """<!DOCTYPE html>
             <div class="content-grid">
 
                 <div class="content-column">
-                    <h3 class="content-heading">Recent Epiphanies</h3>
-                    <div class="content-list">
-""".format(len(epiphanies), len(reflections))
+                    <h3 class="content-heading">The Journey of Epiphanies</h3>
+                    <p class="journey-intro">11 insights that build upon each other, taking you from awakening to integration.</p>
 
-# Add epiphanies
-for item in epiphanies[:5]:
-    index_html += f"""                        <a href="epiphanies/{item['file']}" class="content-item">
-                            <h4>{item['title']}</h4>
-                            <span class="read-time">{item['readTime']}</span>
+                    <div class="journey-start">
+                        <a href="epiphanies/{0}" class="journey-begin-btn">
+                            <span class="btn-label">Begin the Journey</span>
+                            <span class="btn-subtitle">{1}</span>
                         </a>
+                    </div>
+
+                    <div class="journey-preview">
+""".format(epiphanies[0]['file'], epiphanies[0]['title'])
+
+# Group epiphanies by act
+acts = {
+    "Act I: Awakening": epiphanies[0:3],
+    "Act II: Seeing Clearly": epiphanies[3:6],
+    "Act III: Reframing": epiphanies[6:9],
+    "Act IV: Integration": epiphanies[9:11]
+}
+
+for act_name, act_items in acts.items():
+    index_html += f"""                        <div class="act-group">
+                            <h4 class="act-title">{act_name}</h4>
+"""
+    for item in act_items:
+        index_html += f"""                            <a href="epiphanies/{item['file']}" class="journey-item">
+                                <span class="journey-number">{item['order']}</span>
+                                <span class="journey-title">{item['title']}</span>
+                            </a>
+"""
+    index_html += """                        </div>
 """
 
 index_html += """                    </div>

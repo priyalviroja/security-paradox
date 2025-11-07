@@ -2,7 +2,15 @@
 title: "The Mirage of Control"
 category: "epiphany"
 readTime: "3 min"
+order: 1
+next: "the-cost-of-certainty"
+nextContext: "But why do we chase this illusion of control so desperately?"
 ---
+
+<div class="journey-marker">
+<span class="journey-label">Act I: Awakening</span>
+<span class="journey-position">Epiphany 1 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
@@ -35,5 +43,18 @@ Control is finite. Influence is infinite.
 
 <div class="principle-takeaway">
 "Graceful degradation — design systems that fail well and recover quickly. Security is not the absence of failure; it's the elegance of recovery."
+</div>
+</div>
+
+
+</div>
+
+<div class="epiphany-navigation">
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-cost-of-certainty.html" class="nav-link">
+<span class="nav-title">The Cost of Certainty</span>
+<span class="nav-context">But why do we chase this illusion of control so desperately?</span>
+</a>
 </div>
 </div>

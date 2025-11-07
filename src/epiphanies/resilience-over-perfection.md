@@ -57,3 +57,18 @@ Perfection is fragile. Resilience is antifragile—it gets stronger through stre
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-security-theater.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Security Theater</span>
+</a>
+</div>
+<div class="nav-complete">
+<span class="nav-label">Journey Complete</span>
+<a href="../index.html" class="nav-link-home">
+<span class="nav-title">Return to The Security Paradox</span>
+<span class="nav-context">Explore reflections and mental models</span>
+</a>
+</div>
+</div>

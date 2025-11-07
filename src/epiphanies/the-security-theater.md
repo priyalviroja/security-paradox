@@ -57,3 +57,18 @@ Security theater is what you do *instead* of security when you don't know how to
 </div>
 </div>
 
+<div class="epiphany-navigation">
+<div class="nav-prev">
+<a href="the-human-firewall-myth.html" class="nav-link">
+<span class="nav-direction">← Previous</span>
+<span class="nav-title">The Human Firewall Myth</span>
+</a>
+</div>
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="resilience-over-perfection.html" class="nav-link">
+<span class="nav-title">Resilience Over Perfection</span>
+<span class="nav-context">If we reject theater, what do we embrace instead?</span>
+</a>
+</div>
+</div>
