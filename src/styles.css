@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* Color Palette */
+  /* Color Palette - Base */
   --bg-deep: #0a0c10;
   --bg-elevated: #13151a;
   --bg-card: #1a1d24;
@@ -12,8 +12,25 @@
   --text-secondary: #b8bcc4;
   --text-muted: #6c7280;
   --accent-primary: #7c9cbf;
+  --accent-secondary: #9fb8d1;
   --accent-glow: rgba(124, 156, 191, 0.15);
   --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Journey Act Colors - Muted, Sophisticated */
+  --act-awakening: #d4a574;      /* Warm amber - questioning, dawn */
+  --act-awakening-glow: rgba(212, 165, 116, 0.15);
+  --act-seeing: #7c9cbf;         /* Cool blue - clarity, insight */
+  --act-seeing-glow: rgba(124, 156, 191, 0.15);
+  --act-reframing: #8fbc8f;      /* Sage green - growth, new models */
+  --act-reframing-glow: rgba(143, 188, 143, 0.15);
+  --act-integration: #b8a0c7;    /* Soft purple - wisdom, synthesis */
+  --act-integration-glow: rgba(184, 160, 199, 0.15);
+
+  /* Semantic Colors */
+  --color-warning: #e8b86d;      /* Soft gold */
+  --color-insight: #7c9cbf;      /* Primary blue */
+  --color-success: #8fbc8f;      /* Sage green */
+  --color-reflection: #b8a0c7;   /* Soft purple */
 
   /* Typography */
   --font-serif: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
@@ -242,6 +259,34 @@ a:hover {
   opacity: 1;
 }
 
+/* Doorway-Specific Colors */
+.doorway:nth-child(1) {
+  border-top: 2px solid var(--act-awakening);
+}
+
+.doorway:nth-child(1):hover {
+  border-color: var(--act-awakening);
+  box-shadow: 0 8px 32px var(--act-awakening-glow);
+}
+
+.doorway:nth-child(2) {
+  border-top: 2px solid var(--act-reframing);
+}
+
+.doorway:nth-child(2):hover {
+  border-color: var(--act-reframing);
+  box-shadow: 0 8px 32px var(--act-reframing-glow);
+}
+
+.doorway:nth-child(3) {
+  border-top: 2px solid var(--act-integration);
+}
+
+.doorway:nth-child(3):hover {
+  border-color: var(--act-integration);
+  box-shadow: 0 8px 32px var(--act-integration-glow);
+}
+
 .doorway-icon {
   font-size: 2.5rem;
   margin-bottom: var(--space-sm);
@@ -319,6 +364,8 @@ a:hover {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  border-left: 3px solid var(--accent-primary);
+  transition: var(--transition-smooth);
 }
 
 .journey-label {
@@ -328,6 +375,47 @@ a:hover {
 
 .journey-position {
   color: var(--text-muted);
+}
+
+/* Act-Specific Journey Marker Colors */
+.journey-marker[data-act="awakening"],
+.journey-marker:has(.journey-label:contains("Act I")) {
+  border-left-color: var(--act-awakening);
+  background: linear-gradient(to right, var(--act-awakening-glow), var(--bg-card));
+}
+
+.journey-marker[data-act="awakening"] .journey-label {
+  color: var(--act-awakening);
+}
+
+.journey-marker[data-act="seeing"],
+.journey-marker:has(.journey-label:contains("Act II")) {
+  border-left-color: var(--act-seeing);
+  background: linear-gradient(to right, var(--act-seeing-glow), var(--bg-card));
+}
+
+.journey-marker[data-act="seeing"] .journey-label {
+  color: var(--act-seeing);
+}
+
+.journey-marker[data-act="reframing"],
+.journey-marker:has(.journey-label:contains("Act III")) {
+  border-left-color: var(--act-reframing);
+  background: linear-gradient(to right, var(--act-reframing-glow), var(--bg-card));
+}
+
+.journey-marker[data-act="reframing"] .journey-label {
+  color: var(--act-reframing);
+}
+
+.journey-marker[data-act="integration"],
+.journey-marker:has(.journey-label:contains("Act IV")) {
+  border-left-color: var(--act-integration);
+  background: linear-gradient(to right, var(--act-integration-glow), var(--bg-card));
+}
+
+.journey-marker[data-act="integration"] .journey-label {
+  color: var(--act-integration);
 }
 
 /* Epiphany-specific styles */
@@ -531,6 +619,16 @@ a:hover {
 
 .act-group {
   margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent-primary);
+  transition: var(--transition-smooth);
+}
+
+.act-group:hover {
+  background: var(--bg-elevated);
+  transform: translateX(2px);
 }
 
 .act-title {
@@ -541,6 +639,67 @@ a:hover {
   color: var(--accent-primary);
   margin-bottom: var(--space-sm);
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.act-title::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 12px currentColor;
+}
+
+/* Act-Specific Colors for Home Page Groups */
+.act-group[data-act="awakening"] {
+  border-left-color: var(--act-awakening);
+}
+
+.act-group[data-act="awakening"] .act-title {
+  color: var(--act-awakening);
+}
+
+.act-group[data-act="awakening"] .act-title::before {
+  background: var(--act-awakening);
+}
+
+.act-group[data-act="seeing"] {
+  border-left-color: var(--act-seeing);
+}
+
+.act-group[data-act="seeing"] .act-title {
+  color: var(--act-seeing);
+}
+
+.act-group[data-act="seeing"] .act-title::before {
+  background: var(--act-seeing);
+}
+
+.act-group[data-act="reframing"] {
+  border-left-color: var(--act-reframing);
+}
+
+.act-group[data-act="reframing"] .act-title {
+  color: var(--act-reframing);
+}
+
+.act-group[data-act="reframing"] .act-title::before {
+  background: var(--act-reframing);
+}
+
+.act-group[data-act="integration"] {
+  border-left-color: var(--act-integration);
+}
+
+.act-group[data-act="integration"] .act-title {
+  color: var(--act-integration);
+}
+
+.act-group[data-act="integration"] .act-title::before {
+  background: var(--act-integration);
 }
 
 .journey-item {
@@ -574,6 +733,34 @@ a:hover {
   font-size: 0.75rem;
   font-weight: 600;
   flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(124, 156, 191, 0.3);
+  transition: var(--transition-smooth);
+}
+
+.journey-item:hover .journey-number {
+  transform: scale(1.1);
+  box-shadow: 0 0 16px currentColor;
+}
+
+/* Act-Specific Journey Numbers */
+.act-group[data-act="awakening"] .journey-number {
+  background: var(--act-awakening);
+  box-shadow: 0 0 8px var(--act-awakening-glow);
+}
+
+.act-group[data-act="seeing"] .journey-number {
+  background: var(--act-seeing);
+  box-shadow: 0 0 8px var(--act-seeing-glow);
+}
+
+.act-group[data-act="reframing"] .journey-number {
+  background: var(--act-reframing);
+  box-shadow: 0 0 8px var(--act-reframing-glow);
+}
+
+.act-group[data-act="integration"] .journey-number {
+  background: var(--act-integration);
+  box-shadow: 0 0 8px var(--act-integration-glow);
 }
 
 .journey-title {

@@ -55,6 +55,16 @@ You can't firewall your way out of a culture problem.
 </div>
 </div>
 
+
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="security-as-storytelling.html" class="nav-link">
+<span class="nav-title">Security as Storytelling</span>
+<span class="nav-context">If dysfunction is the real threat, how do we communicate this truth?</span>
+</a>
+</div>
+</div>
+
 <div class="epiphany-navigation">
 <div class="nav-prev">
 <a href="speed-is-not-velocity.html" class="nav-link">

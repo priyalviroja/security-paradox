@@ -231,15 +231,15 @@ index_html = """<!DOCTYPE html>
 """.format(epiphanies[0]['file'], epiphanies[0]['title'])
 
 # Group epiphanies by act
-acts = {
-    "Act I: Awakening": epiphanies[0:3],
-    "Act II: Seeing Clearly": epiphanies[3:6],
-    "Act III: Reframing": epiphanies[6:9],
-    "Act IV: Integration": epiphanies[9:11]
-}
+acts = [
+    ("Act I: Awakening", "awakening", epiphanies[0:3]),
+    ("Act II: Seeing Clearly", "seeing", epiphanies[3:6]),
+    ("Act III: Reframing", "reframing", epiphanies[6:9]),
+    ("Act IV: Integration", "integration", epiphanies[9:11])
+]
 
-for act_name, act_items in acts.items():
-    index_html += f"""                        <div class="act-group">
+for act_name, act_slug, act_items in acts:
+    index_html += f"""                        <div class="act-group" data-act="{act_slug}">
                             <h4 class="act-title">{act_name}</h4>
 """
     for item in act_items:

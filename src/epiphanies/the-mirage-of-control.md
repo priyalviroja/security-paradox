@@ -7,7 +7,7 @@ next: "the-cost-of-certainty"
 nextContext: "But why do we chase this illusion of control so desperately?"
 ---
 
-<div class="journey-marker">
+<div class="journey-marker" data-act="awakening">
 <span class="journey-label">Act I: Awakening</span>
 <span class="journey-position">Epiphany 1 of 11</span>
 </div>
@@ -44,6 +44,9 @@ Control is finite. Influence is infinite.
 <div class="principle-takeaway">
 "Graceful degradation — design systems that fail well and recover quickly. Security is not the absence of failure; it's the elegance of recovery."
 </div>
+</div>
+
+
 </div>
 
 

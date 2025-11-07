@@ -51,6 +51,16 @@ Trust is not a binary. It's a spectrum, a surface, a design choice.
 </div>
 </div>
 
+
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-human-firewall-myth.html" class="nav-link">
+<span class="nav-title">The Human Firewall Myth</span>
+<span class="nav-context">If trust is design, how do we redesign our view of humans?</span>
+</a>
+</div>
+</div>
+
 <div class="epiphany-navigation">
 <div class="nav-prev">
 <a href="security-as-storytelling.html" class="nav-link">

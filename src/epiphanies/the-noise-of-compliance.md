@@ -8,7 +8,7 @@ next: "the-paradox-of-visibility"
 nextContext: "If compliance is theater, what should we actually be measuring?"
 ---
 
-<div class="journey-marker">
+<div class="journey-marker" data-act="awakening">
 <span class="journey-label">Act I: Awakening</span>
 <span class="journey-position">Epiphany 3 of 11</span>
 </div>
@@ -50,6 +50,16 @@ If the answer is "none," it's noise.
 
 <div class="principle-takeaway">
 "Compliance is the floor, not the ceiling. Optimize for outcomes, not audits. The question isn't 'Are we compliant?' but 'Are we safer?'"
+</div>
+</div>
+
+
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-paradox-of-visibility.html" class="nav-link">
+<span class="nav-title">The Paradox of Visibility</span>
+<span class="nav-context">If compliance is theater, what should we actually be measuring?</span>
+</a>
 </div>
 </div>
 

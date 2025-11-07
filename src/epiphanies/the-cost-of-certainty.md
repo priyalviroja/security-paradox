@@ -8,7 +8,7 @@ next: "the-noise-of-compliance"
 nextContext: "So if certainty is expensive, why do we perform it so loudly?"
 ---
 
-<div class="journey-marker">
+<div class="journey-marker" data-act="awakening">
 <span class="journey-label">Act I: Awakening</span>
 <span class="journey-position">Epiphany 2 of 11</span>
 </div>
@@ -68,6 +68,16 @@ The best security leaders don't promise certainty. They promise resilience.
 
 <div class="principle-takeaway">
 "Certainty is a lie. Promise resilience, not invulnerability. The goal is not to prevent all failures—it's to survive them."
+</div>
+</div>
+
+
+<div class="nav-next">
+<span class="nav-label">Next in the journey</span>
+<a href="the-noise-of-compliance.html" class="nav-link">
+<span class="nav-title">The Noise of Compliance</span>
+<span class="nav-context">So if certainty is expensive, why do we perform it so loudly?</span>
+</a>
 </div>
 </div>
 

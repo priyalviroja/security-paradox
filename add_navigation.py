@@ -87,19 +87,36 @@ import re
 
 src_dir = "src/epiphanies"
 
+# Map act to slug for data attributes
+act_slug_map = {
+    "Act I: Awakening": "awakening",
+    "Act II: Seeing Clearly": "seeing",
+    "Act III: Reframing": "reframing",
+    "Act IV: Integration": "integration"
+}
+
 for i, epiphany in enumerate(journey):
     filepath = os.path.join(src_dir, f"{epiphany['file']}.md")
-    
+
     if not os.path.exists(filepath):
         print(f"⚠️  File not found: {filepath}")
         continue
-    
+
     with open(filepath, 'r') as f:
         content = f.read()
-    
+
+    act_slug = act_slug_map.get(epiphany['act'], 'default')
+
+    # Update journey marker if it exists
+    if '<div class="journey-marker"' in content:
+        # Replace old journey marker with new one that has data attribute
+        old_marker_pattern = r'<div class="journey-marker"[^>]*>.*?</div>'
+        new_marker = f'<div class="journey-marker" data-act="{act_slug}">\n<span class="journey-label">{epiphany["act"]}</span>\n<span class="journey-position">Epiphany {epiphany["order"]} of 11</span>\n</div>'
+        content = re.sub(old_marker_pattern, new_marker, content, flags=re.DOTALL, count=1)
+
     # Find where the last </div> is (end of principle section)
     last_div_pos = content.rfind('</div>\n</div>')
-    
+
     if last_div_pos == -1:
         print(f"⚠️  Could not find end marker in {epiphany['file']}")
         continue
