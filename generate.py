@@ -236,6 +236,7 @@ index_html = """<!DOCTYPE html>
             <div class="hero-subtitle">
                 <p class="hero-tagline">Security leadership is not the <strong>science of control</strong> — it's the <strong>art of understanding chaos</strong>.</p>
                 <p class="hero-audience">For CISOs and security leaders who know that the hardest problems aren't <strong>technical</strong>—they're <strong>human, organizational, cultural</strong>.</p>
+                <p class="hero-byline" style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.85; font-style: italic;">AI-amplified insights from the architecture layer, translated for the leadership layer.</p>
             </div>
         </div>
     </section>
