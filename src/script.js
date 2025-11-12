@@ -117,4 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Journey circle node clicks
+    const journeyNodes = document.querySelectorAll('.journey-node');
+    journeyNodes.forEach(node => {
+        node.addEventListener('click', (e) => {
+            const href = node.getAttribute('data-href');
+            if (href) {
+                window.location.href = href;
+            }
+        });
+    });
 });

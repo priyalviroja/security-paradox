@@ -975,6 +975,201 @@ a:hover {
   line-height: 1.4;
 }
 
+/* Circular Journey Visualization */
+.journey-circle-container {
+  width: 100%;
+  max-width: 600px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-md);
+}
+
+.journey-circle {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+.circle-center-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  fill: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.circle-center-subtitle {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.journey-node {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.journey-node:hover .node-circle {
+  r: 24;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+.journey-node:hover .node-connector {
+  opacity: 0.8 !important;
+  stroke-width: 3;
+}
+
+.journey-node:hover .node-label {
+  font-weight: 600;
+  font-size: 13px;
+  fill: var(--text-primary);
+}
+
+.node-circle {
+  transition: all 0.3s ease;
+}
+
+.node-number {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--text-primary);
+  pointer-events: none;
+}
+
+.node-label {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  fill: var(--text-secondary);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.node-connector {
+  transition: all 0.3s ease;
+}
+
+/* Act-specific node colors */
+.journey-node[data-act="awakening"] .node-circle {
+  stroke: var(--act-awakening);
+}
+
+.journey-node[data-act="awakening"]:hover .node-circle {
+  fill: var(--act-awakening);
+  fill-opacity: 0.2;
+}
+
+.journey-node[data-act="seeing"] .node-circle {
+  stroke: var(--act-seeing);
+}
+
+.journey-node[data-act="seeing"]:hover .node-circle {
+  fill: var(--act-seeing);
+  fill-opacity: 0.2;
+}
+
+.journey-node[data-act="reframing"] .node-circle {
+  stroke: var(--act-reframing);
+}
+
+.journey-node[data-act="reframing"]:hover .node-circle {
+  fill: var(--act-reframing);
+  fill-opacity: 0.2;
+}
+
+.journey-node[data-act="integration"] .node-circle {
+  stroke: var(--act-integration);
+}
+
+.journey-node[data-act="integration"]:hover .node-circle {
+  fill: var(--act-integration);
+  fill-opacity: 0.2;
+}
+
+/* Journey Legend */
+.journey-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.legend-item:hover {
+  transform: translateY(-2px);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  transition: var(--transition-smooth);
+}
+
+.legend-item:hover .legend-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-item[data-act="awakening"] .legend-dot {
+  border-color: var(--act-awakening);
+  background: var(--act-awakening);
+  box-shadow: 0 0 8px var(--act-awakening-glow);
+}
+
+.legend-item[data-act="awakening"] .legend-text {
+  color: var(--act-awakening);
+}
+
+.legend-item[data-act="seeing"] .legend-dot {
+  border-color: var(--act-seeing);
+  background: var(--act-seeing);
+  box-shadow: 0 0 8px var(--act-seeing-glow);
+}
+
+.legend-item[data-act="seeing"] .legend-text {
+  color: var(--act-seeing);
+}
+
+.legend-item[data-act="reframing"] .legend-dot {
+  border-color: var(--act-reframing);
+  background: var(--act-reframing);
+  box-shadow: 0 0 8px var(--act-reframing-glow);
+}
+
+.legend-item[data-act="reframing"] .legend-text {
+  color: var(--act-reframing);
+}
+
+.legend-item[data-act="integration"] .legend-dot {
+  border-color: var(--act-integration);
+  background: var(--act-integration);
+  box-shadow: 0 0 8px var(--act-integration-glow);
+}
+
+.legend-item[data-act="integration"] .legend-text {
+  color: var(--act-integration);
+}
+
 /* ═══════════════════════════════════════════════════════════
    Navigation
    ═══════════════════════════════════════════════════════════ */

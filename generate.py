@@ -222,40 +222,127 @@ index_html = """<!DOCTYPE html>
                 <!-- Column 1: The Journey of Epiphanies -->
                 <div class="content-column" id="epiphanies-column">
                     <h3 class="content-heading">The Journey of Epiphanies</h3>
-                    <p class="journey-intro">11 insights that build upon each other, taking you from awakening to integration.</p>
+                    <p class="journey-intro">A continuous cycle of awakening, seeing, reframing, and integration. Click any epiphany to begin.</p>
 
-                    <div class="journey-start">
-                        <a href="epiphanies/{0}" class="journey-begin-btn">
-                            <span class="btn-label">Begin the Journey</span>
-                            <span class="btn-subtitle">{1}</span>
-                        </a>
-                    </div>
+                    <div class="journey-circle-container">
+                        <svg class="journey-circle" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Center circle background -->
+                            <circle cx="250" cy="250" r="80" fill="rgba(26, 29, 36, 0.8)" stroke="rgba(124, 156, 191, 0.3)" stroke-width="2"/>
 
-                    <div class="journey-preview">
-""".format(epiphanies[0]['file'], epiphanies[0]['title'])
+                            <!-- Center text -->
+                            <text x="250" y="240" text-anchor="middle" class="circle-center-title">The Journey</text>
+                            <text x="250" y="260" text-anchor="middle" class="circle-center-subtitle">Never Ends</text>
 
-# Group epiphanies by act
-acts = [
-    ("Act I: Awakening", "awakening", epiphanies[0:3]),
-    ("Act II: Seeing Clearly", "seeing", epiphanies[3:6]),
-    ("Act III: Reframing", "reframing", epiphanies[6:9]),
-    ("Act IV: Integration", "integration", epiphanies[9:11])
+                            <!-- Connecting circle path -->
+                            <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(124, 156, 191, 0.2)" stroke-width="2" stroke-dasharray="5,5"/>
+"""
+
+# Calculate positions for 11 epiphanies in a circle
+import math
+
+# Act colors
+act_colors = {
+    'awakening': '#d4a574',      # amber
+    'seeing': '#7c9cbf',          # blue
+    'reframing': '#8fbc8f',       # green
+    'integration': '#b8a0c7'      # purple
+}
+
+# Act assignments
+act_assignments = [
+    'awakening', 'awakening', 'awakening',  # 1-3
+    'seeing', 'seeing', 'seeing',            # 4-6
+    'reframing', 'reframing', 'reframing',  # 7-9
+    'integration', 'integration'             # 10-11
 ]
 
-for act_name, act_slug, act_items in acts:
-    index_html += f"""                        <div class="act-group" data-act="{act_slug}">
-                            <h4 class="act-title">{act_name}</h4>
-"""
-    for item in act_items:
-        index_html += f"""                            <a href="epiphanies/{item['file']}" class="journey-item">
-                                <span class="journey-number">{item['order']}</span>
-                                <span class="journey-title">{item['title']}</span>
-                            </a>
-"""
-    index_html += """                        </div>
+radius = 180
+center_x = 250
+center_y = 250
+
+# Start from top (270 degrees = -90 in standard coords)
+start_angle = -90
+
+for i, epi in enumerate(epiphanies):
+    angle_deg = start_angle + (i * 360 / 11)
+    angle_rad = math.radians(angle_deg)
+
+    x = center_x + radius * math.cos(angle_rad)
+    y = center_y + radius * math.sin(angle_rad)
+
+    act = act_assignments[i]
+    color = act_colors[act]
+
+    # Create clickable group
+    index_html += f"""
+                            <!-- Epiphany {i+1}: {epi['title']} -->
+                            <g class="journey-node" data-act="{act}" data-href="epiphanies/{epi['file']}">
+                                <!-- Connecting line to next node -->
 """
 
-index_html += """                    </div>
+    # Calculate next node position for connecting line
+    next_i = (i + 1) % 11
+    next_angle_deg = start_angle + (next_i * 360 / 11)
+    next_angle_rad = math.radians(next_angle_deg)
+    next_x = center_x + radius * math.cos(next_angle_rad)
+    next_y = center_y + radius * math.sin(next_angle_rad)
+
+    index_html += f"""                                <line x1="{x}" y1="{y}" x2="{next_x}" y2="{next_y}"
+                                      stroke="{color}" stroke-width="2" opacity="0.3" class="node-connector"/>
+
+                                <!-- Node circle -->
+                                <circle cx="{x}" cy="{y}" r="20" fill="rgba(26, 29, 36, 0.9)"
+                                        stroke="{color}" stroke-width="3" class="node-circle"/>
+
+                                <!-- Node number -->
+                                <text x="{x}" y="{y + 5}" text-anchor="middle" class="node-number">{i+1}</text>
+
+                                <!-- Node label (positioned outside) -->
+"""
+
+    # Position label outside the circle
+    label_radius = 220
+    label_x = center_x + label_radius * math.cos(angle_rad)
+    label_y = center_y + label_radius * math.sin(angle_rad)
+
+    # Determine text anchor based on position
+    if x < center_x - 50:
+        anchor = "end"
+    elif x > center_x + 50:
+        anchor = "start"
+    else:
+        anchor = "middle"
+
+    # Shorten title if too long
+    title = epi['title']
+    if len(title) > 25:
+        title = title[:22] + "..."
+
+    index_html += f"""                                <text x="{label_x}" y="{label_y}" text-anchor="{anchor}" class="node-label">{title}</text>
+                            </g>
+"""
+
+index_html += """                        </svg>
+                    </div>
+
+                    <div class="journey-legend">
+                        <div class="legend-item" data-act="awakening">
+                            <span class="legend-dot"></span>
+                            <span class="legend-text">Act I: Awakening</span>
+                        </div>
+                        <div class="legend-item" data-act="seeing">
+                            <span class="legend-dot"></span>
+                            <span class="legend-text">Act II: Seeing Clearly</span>
+                        </div>
+                        <div class="legend-item" data-act="reframing">
+                            <span class="legend-dot"></span>
+                            <span class="legend-text">Act III: Reframing</span>
+                        </div>
+                        <div class="legend-item" data-act="integration">
+                            <span class="legend-dot"></span>
+                            <span class="legend-text">Act IV: Integration</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Column 2: Recent Reflections -->
