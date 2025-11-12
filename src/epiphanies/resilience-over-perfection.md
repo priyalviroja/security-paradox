@@ -30,7 +30,7 @@ This pattern appears across major incidents:
 
 **Maersk (2017)**: NotPetya ransomware destroyed 4,000 servers and 45,000 PCs. But they'd practiced disaster recovery. They rebuilt their entire infrastructure in 10 days. Survived because they designed for resilience, not perfection.
 
-**The pattern: Companies that pursue "perfect security" take an average of 287 days to recover from breaches. Companies that design for resilience take an average of 23 days.**
+**The pattern: Research indicates that companies pursuing "perfect security" take significantly longer to recover from breaches—often months—while companies designed for resilience recover in a matter of days or weeks.**
 
 The difference isn't the breach. It's the design philosophy.
 
@@ -138,9 +138,9 @@ Are you ready to build for that day?
 </div>
 <div class="nav-complete">
 <span class="nav-label">Journey Complete</span>
-<a href="../index.html" class="nav-link-home">
-<span class="nav-title">Return to The Security Paradox</span>
-<span class="nav-context">Explore reflections and mental models</span>
+<a href="../index.html#epiphanies" class="nav-link-home">
+<span class="nav-title">Return to the Journey Map</span>
+<span class="nav-context">The journey never ends. Explore the circle again with new eyes.</span>
 </a>
 </div>
 </div>

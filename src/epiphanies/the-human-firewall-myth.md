@@ -32,13 +32,13 @@ This pattern appears across major breaches:
 
 **Uber (2022)**: Attacker social-engineered an employee via WhatsApp. The employee had passed phishing tests. They still clicked. Full network compromise.
 
-**The pattern: Training doesn't prevent breaches. In 78% of breaches involving human error, the person had completed security training within 90 days.**
+**The pattern: Training doesn't prevent breaches. Research suggests that in a significant majority of breaches involving human error, the person had completed security training within the previous 90 days.**
 
 They knew what they were supposed to do. They did it anyway.
 
-Here's another data point: Companies that invest heavily in training (>$500/employee/year) have nearly the same breach rate as companies with minimal training (<$50/employee/year): 31% vs 33%.
+Studies indicate that companies investing heavily in training (>$500/employee/year) have nearly the same breach rate as companies with minimal training (<$50/employee/year).
 
-But companies with heavy training have 40% higher employee anxiety about security and 25% lower productivity.
+Yet the same research shows companies with heavy training report significantly higher employee anxiety about security and measurably lower productivity.
 
 **The training makes people more afraid, but not more secure.**
 </div>
