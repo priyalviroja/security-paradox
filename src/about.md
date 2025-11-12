@@ -13,7 +13,7 @@ Here's the wild idea: The internet won't be secured by better technology. It wil
 
 But there's a problem.
 
-I live in the **architecture layer**—the systems, the code, the trust boundaries, the places where theory meets reality and reality always wins. I see patterns that leadership doesn't see. I see where frameworks fail, where controls create brittleness, where compliance becomes noise.
+I live in the **architecture layer**—the systems, the code, the trust boundaries, the places where theory meets reality and reality always wins. I've spent years in the trenches, building security architectures at companies where "move fast" and "stay secure" were supposed to be compatible. I see patterns that leadership doesn't see. I see where frameworks fail, where controls create brittleness, where compliance becomes noise.
 
 Leadership lives in the **boardroom**—the budgets, the risk appetite, the business impact. They make decisions based on frameworks that don't match the reality I see in the systems.
 
@@ -40,6 +40,14 @@ I believe that if I can change how even one CISO thinks about security—shift o
 They build differently. Their organization becomes more resilient. The internet gets a little more secure.
 
 **That's the experiment. That's the mission.**
+
+---
+
+**Who am I?**
+
+A security architect who's seen enough to know that the biggest vulnerabilities aren't in the code—they're in how we think about security.
+
+If you're curious enough, you'll figure it out. 🎭
 
 ---
 
@@ -71,5 +79,13 @@ Just an architect who sees things differently, thinks with AI-amplified pattern 
 ---
 
 If these thoughts trigger even one shift in how you think, how you decide, how you lead—we're one step closer.
+
+---
+
+**Curious who's behind this?**
+
+[The answer is one click away.](https://www.linkedin.com/in/priyalviroja/)
+
+---
 
 Now go forth and embrace the paradox. 🎭
