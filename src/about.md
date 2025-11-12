@@ -3,8 +3,6 @@ title: "About"
 category: "page"
 ---
 
-<div class="about-content">
-
 ## Why This Exists (Or: How I Learned to Stop Worrying and Love the Paradox)
 
 You know that moment when you're in a board meeting, explaining why you need $2M for security, and someone asks, "But can you *guarantee* we won't get breached?"
@@ -146,86 +144,3 @@ The world needs more leaders who get this.
 **You're one of them.**
 
 Now go forth and embrace the paradox. 🎭
-
-</div>
-
-<style>
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-xl) var(--space-md);
-}
-
-.about-content h2 {
-    font-size: 2rem;
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-md);
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.about-content h3 {
-    font-size: 1.3rem;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-sm);
-    color: var(--accent-primary);
-    font-family: var(--font-sans);
-    font-weight: 600;
-}
-
-.about-content h4 {
-    font-size: 1.1rem;
-    margin-bottom: var(--space-xs);
-    color: var(--accent-primary);
-}
-
-.about-content p {
-    margin-bottom: var(--space-md);
-    line-height: 1.8;
-    font-size: 1.05rem;
-}
-
-.about-content strong {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.about-content ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: var(--space-md);
-}
-
-.about-content li {
-    padding-left: 1.5rem;
-    margin-bottom: var(--space-xs);
-    position: relative;
-    line-height: 1.7;
-}
-
-.about-content li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent-primary);
-    font-weight: bold;
-}
-
-/* Highlight boxes for key sections */
-.about-content p:has(strong:first-child) {
-    background: var(--bg-elevated);
-    border-left: 3px solid var(--accent-primary);
-    padding: var(--space-sm) var(--space-md);
-    border-radius: 4px;
-    margin: var(--space-md) 0;
-}
-
-/* Add breathing room */
-.about-content > p:first-of-type {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: var(--space-lg);
-}
-</style>
-

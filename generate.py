@@ -118,6 +118,68 @@ if os.path.exists(about_src):
     <title>{title} - The Security Paradox</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+    .about-content {{
+        max-width: 800px;
+        margin: 0 auto;
+        padding: var(--space-xl) var(--space-md);
+    }}
+
+    .about-content h2 {{
+        font-size: 2rem;
+        margin-top: var(--space-xl);
+        margin-bottom: var(--space-md);
+        color: var(--text-primary);
+        font-weight: 600;
+    }}
+
+    .about-content h3 {{
+        font-size: 1.3rem;
+        margin-top: var(--space-lg);
+        margin-bottom: var(--space-sm);
+        color: var(--accent-primary);
+        font-family: var(--font-sans);
+        font-weight: 600;
+    }}
+
+    .about-content h4 {{
+        font-size: 1.1rem;
+        margin-bottom: var(--space-xs);
+        color: var(--accent-primary);
+    }}
+
+    .about-content p {{
+        margin-bottom: var(--space-md);
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }}
+
+    .about-content strong {{
+        color: var(--text-primary);
+        font-weight: 600;
+    }}
+
+    .about-content ul {{
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: var(--space-md);
+    }}
+
+    .about-content li {{
+        padding-left: 1.5rem;
+        margin-bottom: var(--space-xs);
+        position: relative;
+        line-height: 1.7;
+    }}
+
+    .about-content li::before {{
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--accent-primary);
+        font-weight: bold;
+    }}
+    </style>
 </head>
 <body>
     <nav>
@@ -132,7 +194,9 @@ if os.path.exists(about_src):
         </div>
     </nav>
     <main class="container">
-        {html}
+        <div class="about-content">
+            {html}
+        </div>
     </main>
     <script src="script.js"></script>
 </body>
