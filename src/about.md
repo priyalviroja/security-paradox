@@ -47,7 +47,7 @@ They build differently. Their organization becomes more resilient. The internet 
 
 If you're a CISO building something bold—a security program that needs someone who sees patterns others miss, translates architecture to leadership, thinks with AI-amplified pattern recognition, and isn't afraid to challenge frameworks—I'm listening.
 
-**Make me an offer I can't refuse.** 🎭
+**[Make me an offer I can't refuse.](https://www.linkedin.com/in/priyalviroja/)** 🎭
 
 (Yes, that's a Godfather reference. Yes, I'm serious. If your vision is audacious enough, I want to be part of it.)
 
