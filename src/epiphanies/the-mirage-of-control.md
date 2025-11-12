@@ -15,19 +15,27 @@ nextContext: "But why do we chase this illusion of control so desperately?"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I analyzed the architecture diagrams of 73 companies post-breach. Every single one had comprehensive security controls—firewalls, EDR, SIEM, the works. Every dashboard showed green. Every compliance audit passed.
+SolarWinds (2020). The attackers didn't break through firewalls. They didn't exploit zero-days. They became a trusted software update.
 
-Then I traced the actual attack paths.
+Every control—firewalls, EDR, SIEM, network segmentation—said "yes" because the request came from a trusted source. The controls worked perfectly. The architecture failed.
 
-67% of breaches bypassed every control by exploiting trust relationships the architecture diagrams didn't show. A developer's personal laptop. A contractor's VPN. A third-party API with admin access. The org chart was the real attack surface, and it wasn't on any diagram.
+Capital One (2019). The attacker didn't break the firewall. They exploited a misconfigured IAM role—a trust relationship between services. The controls saw a legitimate service making a legitimate request.
 
-The remaining 33% went straight through the controls—not because the controls failed, but because they were designed for yesterday's threats. We were defending castles in the age of cloud-native applications.
+Target (2013). The breach didn't come through the payment network. It came through the HVAC vendor's credentials—a trust relationship with a third party. The controls saw a trusted partner connecting.
 
-Here's what the data showed me: **The more controls you add, the more confident you become. And confidence is the vulnerability.**
+The pattern repeats: **Major breaches bypass controls by exploiting trust relationships between systems.**
 
-Every CISO believes they can control risk. We architect defense-in-depth. We implement zero-trust. We achieve compliance. We create the illusion of a perimeter in a world that has none.
+Here's another pattern: A financial services company had perfect segmentation—every network isolated, every access controlled, every connection monitored.
 
-But I've seen the pattern across hundreds of systems: control is a mirage. The tighter you grip, the more slips through your fingers. Not because the controls are weak—because the system is too complex to control.
+An engineer needed to debug a production issue. They SSH'd from their laptop to a jump box to a production server. Three hops. All legitimate. All logged. All approved.
+
+The attacker was already on the laptop (via a phishing email). The controls saw a trusted user making a trusted connection through approved channels. The breach happened through the architecture of trust, not despite the architecture of control.
+
+**The uncomfortable truth: The more controls you add, the more trust relationships you create. And trust relationships are the real attack surface.**
+
+Every firewall rule is a trust relationship. Every API key is a trust relationship. Every service account is a trust relationship. Every "allow" is a declaration of trust.
+
+You can't control your way to security. You can only influence the shape of trust.
 </div>
 
 <div class="section-divider"></div>
@@ -37,15 +45,15 @@ But I've seen the pattern across hundreds of systems: control is a mirage. The t
 
 What if security leadership isn't about control at all?
 
-I keep coming back to this: in complex systems, control is an illusion. You can't control a system with 10,000 microservices, 500 engineers, 50 third-party integrations, and attack surface that grows every sprint.
+In complex systems, control is an illusion. You can't control a system with 10,000 microservices, 500 engineers, 50 third-party integrations, and attack surface that grows every sprint.
 
-But here's the paradox that keeps me up at night: **the pursuit of control makes you less secure.**
+But here's the paradox: **the pursuit of control makes you less secure.**
 
 Why? Because control creates brittleness. When you design for perfect prevention, you don't design for inevitable failure. When you believe your controls work, you stop looking for what's slipping through. When you optimize for compliance, you stop optimizing for resilience.
 
-I've watched this pattern repeat: organizations with the most sophisticated controls often have the slowest detection, the worst incident response, the longest recovery times. They invested everything in the wall and nothing in what happens when the wall falls.
+The pattern repeats: organizations with the most sophisticated controls often have the slowest detection, the worst incident response, the longest recovery times. They invested everything in the wall and nothing in what happens when the wall falls.
 
-The mature leaders I've studied don't measure control—they measure *influence*. They shape behavior, culture, and incentives. They design systems that assume breach, expect failure, plan for chaos.
+The mature security leaders don't measure control—they measure *influence*. They shape behavior, culture, and incentives. They design systems that assume breach, expect failure, plan for chaos.
 
 They ask different questions:
 - "When this fails—not if—how quickly will we know?"
@@ -57,7 +65,7 @@ But here's the uncomfortable truth: **influence is harder to measure than contro
 
 So we keep chasing the mirage. We keep adding controls. We keep believing we can architect our way to safety.
 
-What would it take for you to let go of control and embrace influence instead?
+What would it take to let go of control and embrace influence instead?
 </div>
 
 <div class="section-divider"></div>

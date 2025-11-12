@@ -16,27 +16,21 @@ nextContext: "If direction matters, what invisible forces are steering us wrong?
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I tracked the deployment velocity of 120 engineering teams over 18 months. I wanted to understand the relationship between speed and security.
+Two engineering teams. Both building similar products. Very different outcomes.
 
-Here's what I found:
+**Team A**: 50+ deploys per day. "Move fast and break things" culture. They had 3x more security incidents than average.
 
-**The fastest-moving teams (50+ deploys/day) had 3x more security incidents than the slowest teams (1 deploy/week).**
+But when incidents happened, they detected them in hours and recovered in hours. Their total cost per incident was 5x lower than industry average.
 
-But when I dug deeper, the pattern inverted:
+**Team B**: 1 deploy per week. "Move carefully and don't break things" culture. They had fewer incidents.
 
-**The fastest teams detected incidents 12x faster and recovered 8x faster. Their total cost per incident was 5x lower.**
+But when things broke—and they always did—they had no muscle memory for recovery. They panicked. They took weeks to recover from incidents that Team A resolved in hours.
 
-**The slowest teams moved carefully to avoid breaking things. But when things broke—and they always did—they had no muscle memory for recovery. They panicked. They took weeks to recover from incidents that the fast teams resolved in hours.**
+**The pattern: Speed without direction is just motion. Velocity is motion in the right direction.**
 
-Then I found the third group: **teams that moved fast AND had low incident rates.**
+Here's a real example: A startup founder said: "We move fast and break things. Security slows us down."
 
-What was different?
-
-They weren't optimizing for speed. They were optimizing for **velocity**—sustainable, directional progress.
-
-I watched one startup founder tell me: "We move fast and break things. Security slows us down."
-
-I asked: "How many times have you rebuilt the authentication system?"
+The question: "How many times have you rebuilt the authentication system?"
 
 "Three times," he admitted. "We keep finding issues."
 
@@ -44,9 +38,15 @@ I asked: "How many times have you rebuilt the authentication system?"
 
 "About two months each time."
 
-I smiled. "So you've spent six months moving fast in the wrong direction. That's speed without velocity. You're running in circles."
+Six months moving fast in the wrong direction. That's speed without velocity. Running in circles.
 
-Speed is motion. Velocity is motion *in the right direction*. You can deploy 100 times a day and still be moving backwards.
+This pattern appears in major incidents:
+
+**Knight Capital (2012)**: Deployed new trading software at high speed. Didn't test properly. Lost $440M in 45 minutes. Speed without velocity destroyed the company.
+
+**GitLab (2017)**: Moved fast, deleted production database. But recovered in hours because they practiced failure. Speed WITH velocity meant they survived the mistake.
+
+**The uncomfortable truth: You can deploy 100 times a day and still be moving backwards.**
 </div>
 
 <div class="section-divider"></div>

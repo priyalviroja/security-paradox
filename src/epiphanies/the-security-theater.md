@@ -16,19 +16,9 @@ nextContext: "If we reject theater, what do we embrace instead?"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I conducted security assessments for 80 companies. I wanted to understand the relationship between visible security and actual security.
+A data center tour: Biometric scanners, mantrap doors, 24/7 armed guards, retinal scanners. Impressive.
 
-Here's what I found:
-
-**There was zero correlation between how secure a company looked and how secure they actually were.**
-
-In fact, there was a slight negative correlation: **companies with the most impressive-looking security often had the weakest actual security posture.**
-
-Let me show you the pattern:
-
-I walked into a data center. Biometric scanners, mantrap doors, 24/7 armed guards, retinal scanners. Impressive.
-
-Then I did the assessment:
+Then the security assessment:
 - Server racks had default passwords
 - Admin credentials were shared via Slack
 - Backup tapes were stored in an unlocked closet
@@ -39,13 +29,15 @@ The physical security was theater. The digital security was Swiss cheese.
 
 Another company had the opposite problem: world-class technical security—zero-trust architecture, automated patching, immutable infrastructure, continuous monitoring.
 
-But their office had a "tailgating culture"—anyone could walk in behind an employee. The receptionist never checked IDs. The server room door was propped open for ventilation. I walked out with a laptop and nobody noticed.
+But their office had a "tailgating culture"—anyone could walk in behind an employee. The receptionist never checked IDs. The server room door was propped open for ventilation. A visitor walked out with a laptop and nobody noticed.
 
-Then I found the pattern that haunts me:
+**The pattern: There's zero correlation between how secure a company looks and how secure they actually are.**
 
-**Companies that invested heavily in visible security (biometric scanners, security awareness posters, compliance certifications) spent 60% less on invisible security (automated patching, architecture review, threat modeling).**
+In fact, there's often a negative correlation: companies with the most impressive-looking security often have the weakest actual security posture.
 
-They were optimizing for looking secure instead of being secure.
+Why? Because they're optimizing for looking secure instead of being secure.
+
+**Companies that invest heavily in visible security (biometric scanners, security awareness posters, compliance certifications) often spend 60% less on invisible security (automated patching, architecture review, threat modeling).**
 
 **Security theater isn't just about doing useless things. It's about optimizing for visibility over effectiveness.**
 </div>

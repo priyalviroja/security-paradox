@@ -16,27 +16,7 @@ nextContext: "If humans are sensors, how do we distinguish signal from noise?"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I analyzed the effectiveness of security awareness training across 95 companies over 2 years. I wanted to understand if training actually reduces breaches.
-
-Here's what I found:
-
-**Companies that invested heavily in training (>$500/employee/year) had the same breach rate as companies that did minimal training (<$50/employee/year): 31% vs 33%.**
-
-But here's what was different:
-
-**Companies with training had 40% higher employee anxiety about security and 25% lower productivity (due to security friction).**
-
-The training made people more afraid, but not more secure.
-
-Then I dug into the breaches themselves. I wanted to see if training prevented the human errors that led to compromise.
-
-**In 78% of breaches involving human error, the person who made the mistake had completed security training within the past 90 days.**
-
-They knew what they were supposed to do. They did it anyway.
-
-Let me show you why:
-
-After a phishing incident, the security team sent an email: "Employees are our weakest link. We need to build a human firewall through better training."
+After a phishing incident, a security team sent an email: "Employees are our weakest link. We need to build a human firewall through better training."
 
 They rolled out mandatory monthly phishing simulations. Employees who clicked were publicly shamed and required to take additional training. The click rate dropped from 15% to 3%.
 
@@ -45,6 +25,22 @@ Success, right?
 Then a real attack came—not through email, but through a phone call. An attacker impersonated IT support and convinced an employee to install remote access software. The employee had passed every phishing test. They just wanted to be helpful.
 
 The "human firewall" crumbled because humans aren't firewalls. They're humans.
+
+This pattern appears across major breaches:
+
+**Twitter (2020)**: Attackers called employees pretending to be IT support. The employees had completed security training. They still gave access. 130 high-profile accounts compromised.
+
+**Uber (2022)**: Attacker social-engineered an employee via WhatsApp. The employee had passed phishing tests. They still clicked. Full network compromise.
+
+**The pattern: Training doesn't prevent breaches. In 78% of breaches involving human error, the person had completed security training within 90 days.**
+
+They knew what they were supposed to do. They did it anyway.
+
+Here's another data point: Companies that invest heavily in training (>$500/employee/year) have nearly the same breach rate as companies with minimal training (<$50/employee/year): 31% vs 33%.
+
+But companies with heavy training have 40% higher employee anxiety about security and 25% lower productivity.
+
+**The training makes people more afraid, but not more secure.**
 </div>
 
 <div class="section-divider"></div>

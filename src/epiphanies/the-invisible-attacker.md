@@ -16,29 +16,25 @@ nextContext: "If dysfunction is the real threat, how do we communicate this trut
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I analyzed the root cause of 156 publicly disclosed breaches over 3 years. I wanted to find the real attack vector.
+Look at the root causes of major breaches:
 
-Here's what I found:
+**SolarWinds (2020)**: The build system was compromised. But the root cause? A culture that prioritized speed over security review. Engineers had broad access. Code reviews were cursory. The org structure made the secure path the hard path.
 
-**83% of breaches had a technical entry point (phishing, vulnerability, misconfiguration).**
+**Uber (2016)**: Credentials in GitHub. But the root cause? Developers had no secure way to store secrets. The security team was understaffed and overruled. The incentive structure rewarded shipping fast, not shipping securely.
 
-**But 91% had an organizational root cause.**
+**Capital One (2019)**: Misconfigured firewall. But the root cause? The security team reported the risk 6 months earlier. Leadership deprioritized the fix. The org chart made security a cost center, not a partner.
 
-The technical vulnerability was just the symptom. The disease was in the org chart.
+**The pattern: 83% of breaches have a technical entry point. But 91% have an organizational root cause.**
 
-Let me show you the pattern:
+The technical vulnerability is just the symptom. The disease is in the org chart.
 
-- **SolarWinds (2020)**: The build system was compromised. But the root cause? A culture that prioritized speed over security review. Engineers had broad access. Code reviews were cursory. The org structure made the secure path the hard path.
+Here's a real example from a security review:
 
-- **Uber (2016)**: Credentials in GitHub. But the root cause? Developers had no secure way to store secrets. The security team was understaffed and overruled. The incentive structure rewarded shipping fast, not shipping securely.
+"Who's your biggest threat?"
 
-- **Capital One (2019)**: Misconfigured firewall. But the root cause? The security team reported the risk 6 months earlier. Leadership deprioritized the fix. The org chart made security a cost center, not a partner.
+The team listed nation-states, organized crime, hacktivists. All external.
 
-During a security review, I asked the team: "Who's your biggest threat?"
-
-They listed nation-states, organized crime, hacktivists. All external.
-
-Then I asked: "Who approved the decision to store customer data in that third-party analytics tool without encryption?"
+"Who approved the decision to store customer data in that third-party analytics tool without encryption?"
 
 Silence.
 

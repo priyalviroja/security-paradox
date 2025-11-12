@@ -14,35 +14,37 @@ nextContext: "If metrics shape reality, does speed of action matter more than di
 </div>
 
 <div class="epiphany-section">
-<parameter name="epiphany-label">The Story</span>
+<span class="epiphany-label">The Story</span>
 
-I analyzed alert patterns across 50 companies using the same SIEM platform. Here's what I found:
-
-**94% experienced alert fatigue within 3 weeks of deployment.**
-
-**The average security team received 4,200 alerts per day. They investigated 47. They acted on 3.**
-
-**When I traced actual breaches, 78% of them generated alerts that were ignored or deprioritized.**
-
-But here's what fascinated me: 6% of companies didn't experience alert fatigue. Their teams weren't drowning. Their detection was faster. Their response was cleaner.
-
-What was different?
-
-They weren't measuring visibility. They were measuring **decision latency**—the time from alert to action.
-
-The high-performing teams had 10x fewer alerts because they'd tuned for decisions, not data. They asked: "What do we need to see to make a better decision?" Not: "What can we see?"
-
-The other 94% fell into the visibility trap. More sensors. More logs. More dashboards. More noise.
-
-I watched one team deploy a new monitoring system. Suddenly, they could see everything—every login, every API call, every file access. The dashboard lit up with thousands of alerts.
+A security team deployed a new SIEM platform. Suddenly, they could see everything—every login, every API call, every file access. The dashboard lit up with thousands of alerts.
 
 "We're under attack!" someone shouted.
 
 They weren't. They were just seeing, for the first time, what normal looked like.
 
-Within a week, alert fatigue set in. Engineers started ignoring notifications. The security team spent all their time investigating false positives. When a real breach happened three months later—a lateral movement attack that triggered 12 high-priority alerts—every single alert was ignored.
+Within a week, alert fatigue set in. Engineers started ignoring notifications. The security team spent all their time investigating false positives.
+
+Three months later, a real breach happened—a lateral movement attack that triggered 12 high-priority alerts. Every single alert was ignored.
 
 More visibility didn't make them more secure. It made them blind in a different way.
+
+This pattern appears across major breaches:
+
+**Target (2013)**: Their FireEye system detected the breach and sent alerts. The security team saw the alerts. They were ignored because the team was drowning in thousands of alerts per day.
+
+**Sony Pictures (2014)**: Their monitoring systems generated alerts about unusual data transfers. The alerts were deprioritized amid the noise. By the time they investigated, 100TB of data had been exfiltrated.
+
+**The pattern: More visibility creates more noise. More noise creates blindness.**
+
+Here's another example: A company invested $2M in a "complete visibility" security stack. They could see everything. They generated 4,200 alerts per day.
+
+The security team investigated 47 alerts per day. They acted on 3.
+
+When they were breached, the attack generated 8 alerts over 3 days. All 8 were ignored or deprioritized.
+
+The visibility didn't fail. The humans did. Because humans can't process 4,200 signals per day.
+
+**The uncomfortable truth: The more you can see, the less you can perceive.**
 </div>
 
 <div class="section-divider"></div>

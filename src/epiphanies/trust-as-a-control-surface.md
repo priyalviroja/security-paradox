@@ -16,9 +16,9 @@ nextContext: "If trust is design, how do we redesign our view of humans?"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I did an architecture review for a company implementing zero-trust. They'd spent 18 months removing all implicit trust, verifying everything, segmenting every network, requiring MFA for every action.
+A company implemented zero-trust. They spent 18 months removing all implicit trust, verifying everything, segmenting every network, requiring MFA for every action.
 
-Then I looked at their packet captures and access logs.
+Then they looked at their packet captures and access logs.
 
 **67% of their traffic was going through unapproved VPNs and shadow IT tools.**
 
@@ -26,9 +26,9 @@ Engineers couldn't collaborate. Teams couldn't ship. Every action required three
 
 The zero-trust architecture created a high-trust culture problem. They'd eliminated technical trust and replaced it with organizational distrust. And distrust is hydraulic—it finds the path of least resistance.
 
-I watched their productivity collapse. I watched their security posture degrade. I watched the CISO get fired.
+Productivity collapsed. Security posture degraded. The CISO was fired.
 
-Then I reviewed a different company. They took a different approach:
+Another company took a different approach:
 
 "We trust our engineers. But we verify. We give broad access, but we monitor. We enable autonomy, but we detect anomalies. We make the secure path the easy path, not the only path."
 
@@ -40,7 +40,7 @@ What was different?
 
 They didn't ask "How do we remove all trust?" They asked "Where should we place trust boundaries, and how do we make them visible?"
 
-And here's what I learned: **Trust is not the opposite of security. Trust is a control surface.**
+**The pattern: Trust is not the opposite of security. Trust is a control surface.**
 </div>
 
 <div class="section-divider"></div>

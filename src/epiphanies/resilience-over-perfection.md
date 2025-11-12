@@ -14,31 +14,29 @@ prev: "the-security-theater"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I analyzed the recovery patterns of 200 companies post-breach. I wanted to understand what separated the companies that survived from the companies that didn't.
-
-Here's what I found:
-
-**Companies that pursued "perfect security" before the breach took an average of 287 days to recover.**
-
-**Companies that designed for resilience took an average of 23 days to recover.**
-
-The difference wasn't the breach. It was the design philosophy.
-
-Let me show you the pattern:
-
 Two companies faced the same ransomware attack.
 
-Company A had invested millions in prevention—firewalls, EDR, SIEM, the works. They believed they were impenetrable. When the attack came through a zero-day vulnerability, they were paralyzed. No backup strategy. No incident response plan. No communication protocol. Recovery took three months and cost $50M. The CEO was fired.
+**Company A** had invested millions in prevention—firewalls, EDR, SIEM, the works. They believed they were impenetrable. When the attack came through a zero-day vulnerability, they were paralyzed. No backup strategy. No incident response plan. No communication protocol. Recovery took three months and cost $50M. The CEO was fired.
 
-Company B had good prevention, but they'd invested equally in resilience—tested backups, practiced incident response, clear communication plans. When the attack came, they detected it in hours, isolated the damage, restored from backups, and were operational in three days. Cost: $500K.
+**Company B** had good prevention, but they'd invested equally in resilience—tested backups, practiced incident response, clear communication plans. When the attack came, they detected it in hours, isolated the damage, restored from backups, and were operational in three days. Cost: $500K.
 
 Company A optimized for perfection. Company B optimized for resilience.
 
 Only one of them survived.
 
+This pattern appears across major incidents:
+
+**Colonial Pipeline (2021)**: Pursued perfect prevention. When ransomware hit, they had no tested recovery plan. Shut down operations for 6 days. Paid $4.4M ransom. CEO testified to Congress.
+
+**Maersk (2017)**: NotPetya ransomware destroyed 4,000 servers and 45,000 PCs. But they'd practiced disaster recovery. They rebuilt their entire infrastructure in 10 days. Survived because they designed for resilience, not perfection.
+
+**The pattern: Companies that pursue "perfect security" take an average of 287 days to recover from breaches. Companies that design for resilience take an average of 23 days.**
+
+The difference isn't the breach. It's the design philosophy.
+
 **Perfection is brittle. Resilience is antifragile.**
 
-And here's the pattern that haunts me: **The companies that tried hardest to prevent breaches were the ones that failed hardest when breaches happened.**
+**The uncomfortable truth: The companies that try hardest to prevent breaches are the ones that fail hardest when breaches happen.**
 </div>
 
 <div class="section-divider"></div>

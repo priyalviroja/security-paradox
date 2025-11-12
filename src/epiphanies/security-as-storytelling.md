@@ -16,17 +16,7 @@ nextContext: "If security is narrative, what role does trust play in our story?"
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
 
-I analyzed 200 security budget requests that went to boards. I wanted to understand what got approved and what got rejected.
-
-Here's what I found:
-
-**Requests with technical justifications had a 34% approval rate.**
-
-**Requests with narrative justifications had an 87% approval rate.**
-
-The difference wasn't the ask. It was the story.
-
-Let me show you:
+Two security budget requests. Same ask. Different outcomes.
 
 **Request A (Rejected):**
 "We need $2M for a SIEM upgrade. Our current system has 47% coverage and lacks ML-based anomaly detection. The new system will improve our security posture by 63%."
@@ -40,7 +30,19 @@ Silence.
 
 Same ask. Different story. Different outcome.
 
-Here's the pattern I keep seeing: **Security is not a technical problem. It's a communication problem. And communication is storytelling.**
+This pattern appears across security leadership:
+
+**Successful CISOs** don't lead with technical metrics. They lead with business impact:
+- "Equifax lost $1.4B and their CEO. We can prevent that for $2M."
+- "Target's breach cost them $162M in settlements. Our investment is $500K."
+- "Yahoo lost $350M in acquisition value. We're asking for $1M."
+
+**Unsuccessful CISOs** lead with technical jargon:
+- "We need to improve our CVSS scores from 7.2 to 4.8"
+- "Our MTTR is 47% above industry benchmark"
+- "We need ML-based anomaly detection for our SIEM"
+
+**The pattern: Security is not a technical problem. It's a communication problem. And communication is storytelling.**
 
 The CISOs who get budget, who get board support, who get organizational buy-in—they're not the ones with the best technical arguments. They're the ones with the best stories.
 </div>
