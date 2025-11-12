@@ -56,66 +56,91 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    // Doorway toggle functionality - ONE AT A TIME
-    const doorwayToggles = document.querySelectorAll('.doorway-toggle');
-    const allColumns = document.querySelectorAll('.content-column');
+    // Full-Screen Doorway Portal Functionality
+    const doorwayPortals = document.querySelectorAll('.doorway-portal');
+    const fullscreenDoorways = document.querySelector('.fullscreen-doorways');
+    const expandedContent = document.querySelector('.expanded-content');
+    const backButton = document.querySelector('.back-to-doorways');
+    const doorwayContents = document.querySelectorAll('.doorway-content');
 
-    doorwayToggles.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
-            e.preventDefault();
+    function openDoorway(doorwayType) {
+        // Hide the doorways section
+        if (fullscreenDoorways) {
+            fullscreenDoorways.classList.add('hidden');
+        }
 
-            const targetId = toggle.getAttribute('data-target');
-            const targetColumn = document.getElementById(targetId);
+        // Show the expanded content section
+        if (expandedContent) {
+            expandedContent.classList.add('active');
+        }
 
-            if (!targetColumn) return;
-
-            // Check if this column is currently the only one visible
-            const isCurrentlyActive = toggle.classList.contains('active');
-            const activeCount = document.querySelectorAll('.doorway-toggle.active').length;
-            const isOnlyActive = isCurrentlyActive && activeCount === 1;
-
-            if (isOnlyActive) {
-                // If clicking the only active column, show all columns
-                doorwayToggles.forEach(t => {
-                    t.classList.add('active');
-                    const indicator = t.querySelector('.doorway-indicator');
-                    if (indicator) indicator.textContent = '−';
-                });
-
-                allColumns.forEach(col => {
-                    col.classList.remove('hidden');
-                });
-            } else {
-                // Hide all other columns, show only this one
-                doorwayToggles.forEach(t => {
-                    if (t === toggle) {
-                        t.classList.add('active');
-                        const indicator = t.querySelector('.doorway-indicator');
-                        if (indicator) indicator.textContent = '−';
-                    } else {
-                        t.classList.remove('active');
-                        const indicator = t.querySelector('.doorway-indicator');
-                        if (indicator) indicator.textContent = '+';
-                    }
-                });
-
-                allColumns.forEach(col => {
-                    if (col === targetColumn) {
-                        col.classList.remove('hidden');
-                    } else {
-                        col.classList.add('hidden');
-                    }
-                });
-
-                // Smooth scroll to the revealed column
-                setTimeout(() => {
-                    targetColumn.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest'
-                    });
-                }, 300);
-            }
+        // Show the specific content
+        doorwayContents.forEach(content => {
+            content.classList.remove('active');
         });
+
+        const targetContent = document.getElementById(`${doorwayType}-content`);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Enter doorway - attach to buttons
+    doorwayPortals.forEach(portal => {
+        const enterButton = portal.querySelector('.portal-enter');
+        if (enterButton) {
+            enterButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const doorwayType = portal.getAttribute('data-doorway');
+                openDoorway(doorwayType);
+            });
+        }
+
+        // Also allow clicking the whole portal
+        portal.addEventListener('click', () => {
+            const doorwayType = portal.getAttribute('data-doorway');
+            openDoorway(doorwayType);
+        });
+    });
+
+    // Back to doorways
+    if (backButton) {
+        backButton.addEventListener('click', () => {
+            // Hide expanded content
+            if (expandedContent) {
+                expandedContent.classList.remove('active');
+            }
+
+            // Hide all doorway contents
+            doorwayContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show doorways section
+            if (fullscreenDoorways) {
+                fullscreenDoorways.classList.remove('hidden');
+            }
+
+            // Scroll to doorways
+            setTimeout(() => {
+                if (fullscreenDoorways) {
+                    fullscreenDoorways.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }, 100);
+        });
+    }
+
+    // ESC key to return to doorways
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && expandedContent && expandedContent.classList.contains('active')) {
+            backButton.click();
+        }
     });
 
     // Journey circle node clicks

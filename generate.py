@@ -240,51 +240,68 @@ index_html = """<!DOCTYPE html>
         </div>
     </section>
 
-    <section class="doorways-section">
-        <div class="container">
-            <h2 class="section-title">Three Doorways</h2>
-            <div class="doorways-grid">
+    <!-- Full-Screen Doorways Section -->
+    <section class="fullscreen-doorways">
+        <h2 class="doorways-intro">Choose Your Path</h2>
 
-                <button class="doorway doorway-toggle active" data-target="epiphanies-column">
-                    <div class="doorway-icon">💡</div>
-                    <h3 class="doorway-title">Epiphanies</h3>
-                    <p class="doorway-description">
-                        Short, 3-minute ideas that challenge assumptions about security, control, and leadership.
-                    </p>
-                    <span class="doorway-count">11 insights</span>
-                    <span class="doorway-indicator">−</span>
-                </button>
+        <div class="doorways-container">
 
-                <button class="doorway doorway-toggle active" data-target="reflections-column">
-                    <div class="doorway-icon">📖</div>
-                    <h3 class="doorway-title">Reflections</h3>
-                    <p class="doorway-description">
-                        Longer essays exploring the paradoxes of security leadership and organizational resilience.
-                    </p>
-                    <span class="doorway-count">3 essays</span>
-                    <span class="doorway-indicator">−</span>
-                </button>
-
-                <button class="doorway doorway-toggle active" data-target="models-column">
-                    <div class="doorway-icon">🧠</div>
-                    <h3 class="doorway-title">Mental Models</h3>
-                    <p class="doorway-description">
-                        Interactive visualizations of abstract security truths—complexity, defense, and trust.
-                    </p>
-                    <span class="doorway-count">Explore</span>
-                    <span class="doorway-indicator">−</span>
-                </button>
-
+            <!-- Doorway 1: Epiphanies -->
+            <div class="doorway-portal" data-doorway="epiphanies">
+                <div class="portal-frame">
+                    <div class="portal-glow"></div>
+                    <div class="portal-content">
+                        <div class="portal-icon">💡</div>
+                        <h3 class="portal-title">Epiphanies</h3>
+                        <p class="portal-description">
+                            11 mind-bending insights that challenge how you think about security, control, and leadership.
+                        </p>
+                        <button class="portal-enter">Enter →</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Doorway 2: Reflections -->
+            <div class="doorway-portal" data-doorway="reflections">
+                <div class="portal-frame">
+                    <div class="portal-glow"></div>
+                    <div class="portal-content">
+                        <div class="portal-icon">📖</div>
+                        <h3 class="portal-title">Reflections</h3>
+                        <p class="portal-description">
+                            Deeper essays exploring the paradoxes of security leadership and organizational resilience.
+                        </p>
+                        <button class="portal-enter">Enter →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doorway 3: Mental Models -->
+            <div class="doorway-portal" data-doorway="models">
+                <div class="portal-frame">
+                    <div class="portal-glow"></div>
+                    <div class="portal-content">
+                        <div class="portal-icon">🧠</div>
+                        <h3 class="portal-title">Mental Models</h3>
+                        <p class="portal-description">
+                            Interactive visualizations of abstract security truths—complexity, defense, and trust.
+                        </p>
+                        <button class="portal-enter">Enter →</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section class="content-section">
-        <div class="container">
-            <div class="content-grid">
+    <!-- Expanded Content Sections (hidden by default) -->
+    <section class="expanded-content">
+        <button class="back-to-doorways" aria-label="Back to doorways">← Back to Doorways</button>
 
-                <!-- Column 1: The Journey of Epiphanies -->
-                <div class="content-column" id="epiphanies-column">
+        <div class="content-wrapper">
+
+                <!-- Epiphanies Content -->
+                <div class="doorway-content" id="epiphanies-content">
                     <h3 class="content-heading">The Journey of Epiphanies</h3>
                     <p class="journey-intro">A continuous cycle of awakening, seeing, reframing, and integration. Click any epiphany to begin.</p>
 
@@ -446,8 +463,8 @@ for act_name, act_slug, act_items in acts:
 index_html += """                    </div>
                 </div>
 
-                <!-- Column 2: Recent Reflections -->
-                <div class="content-column" id="reflections-column">
+                <!-- Reflections Content -->
+                <div class="doorway-content" id="reflections-content">
                     <h3 class="content-heading">Recent Reflections</h3>
                     <p class="column-intro">Longer essays exploring security leadership, culture, and transformation.</p>
                     <div class="content-list">
@@ -464,8 +481,8 @@ for item in reflections:
 index_html += """                    </div>
                 </div>
 
-                <!-- Column 3: Mental Models -->
-                <div class="content-column" id="models-column">
+                <!-- Mental Models Content -->
+                <div class="doorway-content" id="models-content">
                     <h3 class="content-heading">Mental Models</h3>
                     <p class="column-intro">Interactive visualizations of abstract security truths.</p>
                     <div class="content-list">
