@@ -273,10 +273,12 @@ for i, epi in enumerate(epiphanies):
     act = act_assignments[i]
     color = act_colors[act]
 
-    # Create clickable group
+    # Create clickable group with tooltip
+    start_here = ' data-start="true"' if i == 0 else ''
     index_html += f"""
                             <!-- Epiphany {i+1}: {epi['title']} -->
-                            <g class="journey-node" data-act="{act}" data-href="epiphanies/{epi['file']}">
+                            <g class="journey-node" data-act="{act}" data-href="epiphanies/{epi['file']}" data-title="{epi['title']}"{start_here}>
+                                <title>{epi['title']}</title>
                                 <!-- Connecting line to next node -->
 """
 
@@ -343,6 +345,41 @@ index_html += """                        </svg>
                             <span class="legend-text">Act IV: Integration</span>
                         </div>
                     </div>
+
+                    <!-- Toggle for list view -->
+                    <div class="view-toggle-container">
+                        <button class="view-toggle-btn" id="toggleListView">
+                            <span class="toggle-icon">📋</span>
+                            <span class="toggle-text">Show List View</span>
+                        </button>
+                    </div>
+
+                    <!-- Collapsible list view -->
+                    <div class="journey-list-view" id="journeyListView" style="display: none;">
+"""
+
+# Add the list view with all epiphanies grouped by act
+acts = [
+    ("Act I: Awakening", "awakening", epiphanies[0:3]),
+    ("Act II: Seeing Clearly", "seeing", epiphanies[3:6]),
+    ("Act III: Reframing", "reframing", epiphanies[6:9]),
+    ("Act IV: Integration", "integration", epiphanies[9:11])
+]
+
+for act_name, act_slug, act_items in acts:
+    index_html += f"""                        <div class="act-group" data-act="{act_slug}">
+                            <h4 class="act-title">{act_name}</h4>
+"""
+    for item in act_items:
+        index_html += f"""                            <a href="epiphanies/{item['file']}" class="journey-item">
+                                <span class="journey-number">{item['order']}</span>
+                                <span class="journey-title">{item['title']}</span>
+                            </a>
+"""
+    index_html += """                        </div>
+"""
+
+index_html += """                    </div>
                 </div>
 
                 <!-- Column 2: Recent Reflections -->
@@ -352,8 +389,8 @@ index_html += """                        </svg>
                     <div class="content-list">
 """
 
-# Add reflections
-for item in reflections[:3]:
+# Add ALL reflections (not just 3)
+for item in reflections:
     index_html += f"""                        <a href="reflections/{item['file']}" class="content-item">
                             <h4 class="content-item-title">{item['title']}</h4>
                             <span class="read-time">{item['readTime']}</span>
@@ -380,6 +417,27 @@ index_html += """                    </div>
                             <div class="model-content">
                                 <h4 class="content-item-title">Defense in Depth</h4>
                                 <p class="model-description">Visualize how layered security contains failure</p>
+                            </div>
+                        </a>
+                        <a href="mental-models/trust-boundaries.html" class="content-item model-item">
+                            <div class="model-icon-small">🔐</div>
+                            <div class="model-content">
+                                <h4 class="content-item-title">Trust Boundaries</h4>
+                                <p class="model-description">Explore zero-trust architecture and verification zones</p>
+                            </div>
+                        </a>
+                        <a href="mental-models/incident-response-timeline.html" class="content-item model-item">
+                            <div class="model-icon-small">⏱️</div>
+                            <div class="model-content">
+                                <h4 class="content-item-title">Incident Response Timeline</h4>
+                                <p class="model-description">See how time compounds the cost of breaches</p>
+                            </div>
+                        </a>
+                        <a href="mental-models/security-debt-compound.html" class="content-item model-item">
+                            <div class="model-icon-small">📈</div>
+                            <div class="model-content">
+                                <h4 class="content-item-title">Security Debt Compounding</h4>
+                                <p class="model-description">Watch security debt grow exponentially over time</p>
                             </div>
                         </a>
                     </div>

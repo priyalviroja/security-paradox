@@ -128,4 +128,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // List view toggle
+    const toggleBtn = document.getElementById('toggleListView');
+    const listView = document.getElementById('journeyListView');
+
+    if (toggleBtn && listView) {
+        toggleBtn.addEventListener('click', () => {
+            const isVisible = listView.style.display !== 'none';
+
+            if (isVisible) {
+                listView.style.display = 'none';
+                toggleBtn.querySelector('.toggle-text').textContent = 'Show List View';
+                toggleBtn.querySelector('.toggle-icon').textContent = '📋';
+            } else {
+                listView.style.display = 'block';
+                toggleBtn.querySelector('.toggle-text').textContent = 'Hide List View';
+                toggleBtn.querySelector('.toggle-icon').textContent = '✕';
+
+                // Smooth scroll to list view
+                setTimeout(() => {
+                    listView.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }, 100);
+            }
+        });
+    }
 });

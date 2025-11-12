@@ -987,6 +987,7 @@ a:hover {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+  pointer-events: all;
 }
 
 .circle-center-title {
@@ -1008,6 +1009,24 @@ a:hover {
 .journey-node {
   cursor: pointer;
   transition: all 0.3s ease;
+  pointer-events: all;
+}
+
+/* Start Here indicator for first node */
+.journey-node[data-start="true"] .node-circle {
+  stroke-width: 4;
+  animation: startHerePulse 2s ease-in-out infinite;
+}
+
+@keyframes startHerePulse {
+  0%, 100% {
+    stroke-width: 4;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  50% {
+    stroke-width: 5;
+    filter: drop-shadow(0 0 16px currentColor);
+  }
 }
 
 .journey-node:hover .node-circle {
@@ -1168,6 +1187,135 @@ a:hover {
 
 .legend-item[data-act="integration"] .legend-text {
   color: var(--act-integration);
+}
+
+/* View Toggle Button */
+.view-toggle-container {
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+.view-toggle-btn {
+  background: var(--bg-card);
+  border: 2px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.view-toggle-btn:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+}
+
+.toggle-text {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* Journey List View */
+.journey-list-view {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.journey-list-view .act-group {
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-card);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent-primary);
+  transition: var(--transition-smooth);
+}
+
+.journey-list-view .act-group:hover {
+  background: var(--bg-elevated);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.journey-list-view .act-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.journey-list-view .act-title::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.journey-list-view .journey-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  margin-bottom: 0.35rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.journey-list-view .journey-item:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent-primary);
+  transform: translateX(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.journey-list-view .journey-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: var(--bg-deep);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(124, 156, 191, 0.3);
+  transition: var(--transition-smooth);
+}
+
+.journey-list-view .journey-item:hover .journey-number {
+  transform: scale(1.2) rotate(5deg);
+  box-shadow: 0 0 20px currentColor;
+}
+
+.journey-list-view .journey-title {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.4;
 }
 
 /* ═══════════════════════════════════════════════════════════
