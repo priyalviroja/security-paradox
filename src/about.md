@@ -72,6 +72,4 @@ Just an architect who sees things differently, thinks with AI-amplified pattern 
 
 If these thoughts trigger even one shift in how you think, how you decide, how you lead—we're one step closer.
 
-**Questions?** [hello@securityparadox.com](mailto:hello@securityparadox.com)
-
 Now go forth and embrace the paradox. 🎭
