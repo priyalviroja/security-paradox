@@ -109,6 +109,85 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(124, 156, 191, 0.3);
         }
+
+        .model-about, .key-insights, .related-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .model-about h3, .key-insights h3, .related-content h3 {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .model-about p {
+            margin-bottom: var(--space-xs);
+            font-size: 0.95rem;
+        }
+
+        .key-insights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-insights li {
+            margin-bottom: var(--space-sm);
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .key-insights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .related-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .related-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .related-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(124, 156, 191, 0.2);
+        }
+
+        .link-icon {
+            font-size: 1.2rem;
+        }
+
+        .link-text {
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -125,8 +204,16 @@
     
     <div class="model-container">
         <h1>Attack Surface</h1>
+
+        <!-- About This Model -->
+        <div class="model-about">
+            <h3>About This Model</h3>
+            <p>Your attack surface is the sum of all points where an attacker can try to enter or extract data. Every feature, API endpoint, third-party integration, dependency, and line of code expands it. More surface = more vulnerability.</p>
+            <p><strong>Why it matters:</strong> The average web application has 26 third-party integrations (Snyk 2023). Each one is a potential breach vector. 80% of breaches involve third-party or supply chain vulnerabilities.</p>
+        </div>
+
         <p class="model-description">
-            Your attack surface grows with every feature, integration, and dependency. 
+            Your attack surface grows with every feature, integration, and dependency.
             Hover over each bubble to see how complexity compounds.
         </p>
         
@@ -139,8 +226,35 @@
         </div>
         
         <div class="model-insight">
-            "Every line of code, every API endpoint, every third-party integration is a potential entry point. 
+            "Every line of code, every API endpoint, every third-party integration is a potential entry point.
             The attack surface is not what you build—it's what you expose."
+        </div>
+
+        <!-- Key Insights -->
+        <div class="key-insights">
+            <h3>Key Insights</h3>
+            <ul>
+                <li><strong>Complexity is the enemy:</strong> Every new feature, integration, or dependency increases attack surface non-linearly. 4 components → 6 connections. 10 components → 45 connections.</li>
+                <li><strong>Third-party risk is your risk:</strong> You don't control their security, but you're liable for breaches. SolarWinds, Log4j, and MOVEit were all supply chain attacks.</li>
+                <li><strong>Unused code is still vulnerable:</strong> That deprecated API endpoint you forgot about? Still exposed. That old library you never removed? Still exploitable.</li>
+                <li><strong>Reduction is a feature:</strong> Every feature you don't ship, every integration you don't add, every dependency you remove makes you more secure.</li>
+                <li><strong>Real-world example:</strong> SolarWinds breach (2020) compromised 18,000 organizations through a single supply chain attack. One compromised dependency = massive attack surface expansion.</li>
+            </ul>
+        </div>
+
+        <!-- Related Content -->
+        <div class="related-content">
+            <h3>Related Content</h3>
+            <div class="related-links">
+                <a href="../epiphanies/the-mirage-of-control.html" class="related-link">
+                    <span class="link-icon">📖</span>
+                    <span class="link-text">Epiphany: The Mirage of Control</span>
+                </a>
+                <a href="../epiphanies/the-invisible-attacker-in-the-org-chart.html" class="related-link">
+                    <span class="link-icon">📖</span>
+                    <span class="link-text">Epiphany: The Invisible Attacker in the Org Chart</span>
+                </a>
+            </div>
         </div>
     </div>
     

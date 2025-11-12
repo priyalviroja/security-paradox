@@ -161,6 +161,85 @@
             border-radius: 4px;
             border: 2px solid;
         }
+
+        .model-about, .key-insights, .related-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .model-about h3, .key-insights h3, .related-content h3 {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .model-about p {
+            margin-bottom: var(--space-xs);
+            font-size: 0.95rem;
+        }
+
+        .key-insights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-insights li {
+            margin-bottom: var(--space-sm);
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .key-insights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .related-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .related-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .related-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(124, 156, 191, 0.2);
+        }
+
+        .link-icon {
+            font-size: 1.2rem;
+        }
+
+        .link-text {
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -177,6 +256,14 @@
     
     <div class="model-container">
         <h1>Trust Boundaries</h1>
+
+        <!-- About This Model -->
+        <div class="model-about">
+            <h3>About This Model</h3>
+            <p>Trust boundaries define where you verify identity, enforce policies, and monitor behavior. In traditional perimeter security, trust was binary: inside = trusted, outside = untrusted. Modern zero-trust architecture recognizes that trust is a spectrum, and verification must happen continuously at every boundary.</p>
+            <p><strong>Why it matters:</strong> 76% of breaches involve compromised credentials or insider threats (Verizon DBIR 2023). The perimeter is dead—trust boundaries are your new defense.</p>
+        </div>
+
         <p class="model-description">
             Trust is not binary—it's a spectrum. Click zones to see how trust flows through your architecture.
             Every boundary is a decision about where to verify, where to monitor, and where to contain.
@@ -208,8 +295,35 @@
         </div>
         
         <div class="model-insight">
-            "Trust is not the opposite of security—it's a control surface. The question isn't whether to trust, 
+            "Trust is not the opposite of security—it's a control surface. The question isn't whether to trust,
             but where to place trust boundaries and how to verify them continuously."
+        </div>
+
+        <!-- Key Insights -->
+        <div class="key-insights">
+            <h3>Key Insights</h3>
+            <ul>
+                <li><strong>Trust is a spectrum, not binary:</strong> Different zones require different levels of verification—from "verify everything" (Internet) to "verify continuously" (internal networks).</li>
+                <li><strong>Perimeter security is obsolete:</strong> With cloud, SaaS, mobile, and remote work, there is no perimeter. Every access point is a potential breach.</li>
+                <li><strong>Zero trust ≠ zero access:</strong> It means "never trust, always verify"—authenticate, authorize, and audit every request, regardless of source.</li>
+                <li><strong>Micro-segmentation contains breaches:</strong> By dividing your network into small zones, you limit lateral movement and contain damage.</li>
+                <li><strong>Real-world example:</strong> Google's BeyondCorp eliminated VPNs entirely, treating all networks as untrusted and verifying every request based on device, user, and context.</li>
+            </ul>
+        </div>
+
+        <!-- Related Content -->
+        <div class="related-content">
+            <h3>Related Content</h3>
+            <div class="related-links">
+                <a href="../epiphanies/trust-as-a-control-surface.html" class="related-link">
+                    <span class="link-icon">📖</span>
+                    <span class="link-text">Epiphany: Trust as a Control Surface</span>
+                </a>
+                <a href="../reflections/the-illusion-of-the-perimeter.html" class="related-link">
+                    <span class="link-icon">💭</span>
+                    <span class="link-text">Reflection: The Illusion of the Perimeter</span>
+                </a>
+            </div>
         </div>
     </div>
     

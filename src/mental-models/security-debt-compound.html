@@ -195,6 +195,85 @@
         .success {
             color: #8fbc8f;
         }
+
+        .model-about, .key-insights, .related-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .model-about h3, .key-insights h3, .related-content h3 {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .model-about p {
+            margin-bottom: var(--space-xs);
+            font-size: 0.95rem;
+        }
+
+        .key-insights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-insights li {
+            margin-bottom: var(--space-sm);
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .key-insights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .related-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .related-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .related-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(124, 156, 191, 0.2);
+        }
+
+        .link-icon {
+            font-size: 1.2rem;
+        }
+
+        .link-text {
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -211,6 +290,14 @@
     
     <div class="model-container">
         <h1>Security Debt Compounding</h1>
+
+        <!-- About This Model -->
+        <div class="model-about">
+            <h3>About This Model</h3>
+            <p>Security debt is like financial debt: every shortcut you take today creates interest that compounds over time. Skip input validation? That's debt. Delay patching? More debt. Use a weak encryption algorithm? Debt that grows exponentially as attackers get smarter.</p>
+            <p><strong>Why it matters:</strong> The average cost to fix a security bug in production is 30x higher than fixing it in development (IBM). Security debt doesn't just accumulate—it multiplies.</p>
+        </div>
+
         <p class="model-description">
             Security debt compounds like financial debt—skip security today, pay exponentially more tomorrow.
             Watch how small shortcuts accumulate into catastrophic risk over time.
@@ -240,9 +327,36 @@
         </div>
         
         <div class="model-insight">
-            "Security debt doesn't just accumulate—it compounds. Every shortcut makes the next one easier to justify, 
-            and the cost of remediation grows exponentially. The best time to pay it down was yesterday. 
+            "Security debt doesn't just accumulate—it compounds. Every shortcut makes the next one easier to justify,
+            and the cost of remediation grows exponentially. The best time to pay it down was yesterday.
             The second best time is now."
+        </div>
+
+        <!-- Key Insights -->
+        <div class="key-insights">
+            <h3>Key Insights</h3>
+            <ul>
+                <li><strong>Debt compounds exponentially:</strong> Each quarter of delay doesn't just add risk—it multiplies it. 10 → 23 → 40 → 70 risk units in just 4 quarters.</li>
+                <li><strong>Remediation costs skyrocket:</strong> Fixing security issues in production costs 30x more than in development. Every delay makes the fix more expensive.</li>
+                <li><strong>Shortcuts create culture:</strong> One team skips security → others follow → it becomes "how we ship." Debt becomes organizational norm.</li>
+                <li><strong>Paying down debt is hard:</strong> It requires dedicated capacity (20-30% of sprint) and executive buy-in. Most teams never allocate it.</li>
+                <li><strong>Real-world example:</strong> Equifax breach (2017) was caused by an unpatched vulnerability known for 2 months. Cost: $1.4B in fines and settlements. Security debt paid in full.</li>
+            </ul>
+        </div>
+
+        <!-- Related Content -->
+        <div class="related-content">
+            <h3>Related Content</h3>
+            <div class="related-links">
+                <a href="../epiphanies/the-cost-of-certainty.html" class="related-link">
+                    <span class="link-icon">📖</span>
+                    <span class="link-text">Epiphany: The Cost of Certainty</span>
+                </a>
+                <a href="../reflections/security-as-organizational-debt.html" class="related-link">
+                    <span class="link-icon">💭</span>
+                    <span class="link-text">Reflection: Security as Organizational Debt</span>
+                </a>
+            </div>
         </div>
     </div>
     
