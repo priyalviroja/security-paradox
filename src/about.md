@@ -70,7 +70,6 @@ Security leaders who've realized their biggest vulnerability isn't the networkâ€
 - **Epiphanies** (3-min reads that make you go "Oh. *Oh.*")
 - **Reflections** (deeper explorations of paradoxes)
 - **Mental Models** (interactive visualizations of abstract truths)
-- **Audio Fireflies** (micro-thoughts for moments between meetings)
 
 No ads. No tracking. No paywalls. No bullshit.
 

@@ -99,7 +99,6 @@ def render_markdown_section(section_name, output_dir):
 # Render all sections
 epiphanies = render_markdown_section("epiphanies", os.path.join(DIST, "epiphanies"))
 reflections = render_markdown_section("reflections", os.path.join(DIST, "reflections"))
-audio = render_markdown_section("audio", os.path.join(DIST, "audio"))
 
 # Render about page
 about_src = os.path.join(SRC, "about.md")
@@ -512,16 +511,6 @@ index_html += """                    </div>
         </div>
     </section>
 
-    <section class="audio-section">
-        <div class="container">
-            <h3 class="content-heading">Audio Fireflies</h3>
-            <p class="section-description">
-                Micro reflections for leaders on the move—2-3 minute contemplative pieces for moments between meetings.
-            </p>
-            <a href="audio/index.html" class="cta-link">Explore Audio →</a>
-        </div>
-    </section>
-
     <footer class="footer">
         <div class="container">
             <p>Built with care for security leaders who think deeply.</p>
@@ -539,5 +528,4 @@ print(f"✨ Generated site in dist/")
 print(f"   📝 {len(epiphanies)} epiphanies")
 print(f"   📖 {len(reflections)} reflections")
 print(f"   🧠 Mental models")
-print(f"   🎧 Audio section")
 print(f"   ℹ️  About page")
