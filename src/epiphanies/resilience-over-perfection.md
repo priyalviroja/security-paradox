@@ -2,7 +2,14 @@
 title: "Resilience Over Perfection"
 category: "epiphany"
 readTime: "3 min"
+order: 11
+prev: "the-security-theater"
 ---
+
+<div class="journey-marker" data-act="integration">
+<span class="journey-label">Act IV: Integration</span>
+<span class="journey-position">Epiphany 11 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

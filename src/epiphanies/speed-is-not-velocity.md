@@ -2,7 +2,16 @@
 title: "Speed Is Not Velocity"
 category: "epiphany"
 readTime: "3 min"
+order: 5
+prev: "the-paradox-of-visibility"
+next: "the-invisible-attacker"
+nextContext: "If direction matters, what invisible forces are steering us wrong?"
 ---
+
+<div class="journey-marker" data-act="seeing">
+<span class="journey-label">Act II: Seeing Clearly</span>
+<span class="journey-position">Epiphany 5 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

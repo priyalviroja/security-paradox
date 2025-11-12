@@ -2,7 +2,16 @@
 title: "The Security Theater"
 category: "epiphany"
 readTime: "3 min"
+order: 10
+prev: "the-human-firewall-myth"
+next: "resilience-over-perfection"
+nextContext: "If we reject theater, what do we embrace instead?"
 ---
+
+<div class="journey-marker" data-act="integration">
+<span class="journey-label">Act IV: Integration</span>
+<span class="journey-position">Epiphany 10 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

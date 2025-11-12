@@ -2,7 +2,16 @@
 title: "The Paradox of Visibility"
 category: "epiphany"
 readTime: "3 min"
+order: 4
+prev: "the-noise-of-compliance"
+next: "speed-is-not-velocity"
+nextContext: "If metrics shape reality, does speed of action matter more than direction?"
 ---
+
+<div class="journey-marker" data-act="seeing">
+<span class="journey-label">Act II: Seeing Clearly</span>
+<span class="journey-position">Epiphany 4 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

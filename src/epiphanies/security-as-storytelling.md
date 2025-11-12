@@ -2,7 +2,16 @@
 title: "Security as Storytelling"
 category: "epiphany"
 readTime: "3 min"
+order: 7
+prev: "the-invisible-attacker"
+next: "trust-as-a-control-surface"
+nextContext: "If security is narrative, what role does trust play in our story?"
 ---
+
+<div class="journey-marker" data-act="reframing">
+<span class="journey-label">Act III: Reframing</span>
+<span class="journey-position">Epiphany 7 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

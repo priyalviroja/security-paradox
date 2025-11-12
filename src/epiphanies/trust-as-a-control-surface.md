@@ -2,7 +2,16 @@
 title: "Trust as a Control Surface"
 category: "epiphany"
 readTime: "3 min"
+order: 8
+prev: "security-as-storytelling"
+next: "the-human-firewall-myth"
+nextContext: "If trust is design, how do we redesign our view of humans?"
 ---
+
+<div class="journey-marker" data-act="reframing">
+<span class="journey-label">Act III: Reframing</span>
+<span class="journey-position">Epiphany 8 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

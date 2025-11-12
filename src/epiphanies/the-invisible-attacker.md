@@ -2,7 +2,16 @@
 title: "The Invisible Attacker in the Org Chart"
 category: "epiphany"
 readTime: "3 min"
+order: 6
+prev: "speed-is-not-velocity"
+next: "security-as-storytelling"
+nextContext: "If dysfunction is the real threat, how do we communicate this truth?"
 ---
+
+<div class="journey-marker" data-act="seeing">
+<span class="journey-label">Act II: Seeing Clearly</span>
+<span class="journey-position">Epiphany 6 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>

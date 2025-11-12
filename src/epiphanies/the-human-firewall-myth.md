@@ -2,7 +2,16 @@
 title: "The Human Firewall Myth"
 category: "epiphany"
 readTime: "3 min"
+order: 9
+prev: "trust-as-a-control-surface"
+next: "the-security-theater"
+nextContext: "If humans are sensors, how do we distinguish signal from noise?"
 ---
+
+<div class="journey-marker" data-act="reframing">
+<span class="journey-label">Act III: Reframing</span>
+<span class="journey-position">Epiphany 9 of 11</span>
+</div>
 
 <div class="epiphany-section">
 <span class="epiphany-label">The Story</span>
